@@ -88,6 +88,23 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "ldnf-ng-app:build:production",
+              "serveTarget": "ldnf-ng-app:serve:production"
+            },
+            "development": {
+              "buildTarget": "ldnf-ng-app:build:development",
+              "serveTarget": "ldnf-ng-app:serve:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
