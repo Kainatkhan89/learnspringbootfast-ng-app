@@ -13,13 +13,13 @@ import {
     RouterLink,
     NoProgressWelcomeMessageComponent,
     NgIf,
-    ResumeProgressWelcomeMessageComponent
+    ResumeProgressWelcomeMessageComponent,
   ],
   templateUrl: './home-page-progress-card.component.html',
   styleUrl: './home-page-progress-card.component.css'
 })
 export class HomePageProgressCardComponent {
-  @Input() progressPercentage: number = 10;
+  @Input() progressPercentage: number = 0;
 
   readonly RADIUS: number = 120;
   readonly CIRCUMFERENCE: number = 2 * 22 / 7 * this.RADIUS;
