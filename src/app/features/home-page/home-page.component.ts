@@ -11,6 +11,7 @@ import {data} from "autoprefixer";
 import * as console from "console";
 import {error} from "@angular/compiler-cli/src/transformers/util";
 import {LoadingSpinnerComponent} from "../../shared/loading-spinner/loading-spinner.component";
+import {HomePageFooterComponent} from "./home-page-footer/home-page-footer.component";
 
 @Component({
   selector: 'ldnf-home-page',
@@ -21,7 +22,8 @@ import {LoadingSpinnerComponent} from "../../shared/loading-spinner/loading-spin
     HomePageProgressCardComponent,
     NgIf,
     NgForOf,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    HomePageFooterComponent
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
