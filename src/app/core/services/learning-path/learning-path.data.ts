@@ -7,7 +7,7 @@ export class LearningPathData implements InMemoryDbService {
     id: 0,
     number: 1,
     title: 'Spring Boot: The Concepts',
-    description: '',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     styles: {
       color: 'INDIGO',
       icon: 'BOOK'
@@ -60,7 +60,7 @@ export class LearningPathData implements InMemoryDbService {
     id: 1,
     number: 2,
     title: 'Getting Started',
-    description: '',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     styles: {
       color: 'TEAL',
       icon: 'FLAG'
@@ -113,7 +113,7 @@ export class LearningPathData implements InMemoryDbService {
     id: 2,
     number: 3,
     title: 'Controllers and Services',
-    description: '',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     styles: {
       color: 'PURPLE',
       icon: 'TERMINAL'
@@ -166,7 +166,7 @@ export class LearningPathData implements InMemoryDbService {
     id: 3,
     number: 4,
     title: 'Validations and Error Handling',
-    description: '',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     styles: {
       color: 'PINK',
       icon: 'WARNING'
@@ -219,7 +219,7 @@ export class LearningPathData implements InMemoryDbService {
     id: 4,
     number: 5,
     title: 'Testing with Spring Boot',
-    description: '',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     styles: {
       color: 'YELLOW',
       icon: 'SHIELD'
@@ -272,7 +272,7 @@ export class LearningPathData implements InMemoryDbService {
     id: 5,
     number: 6,
     title: 'Data Access',
-    description: '',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     styles: {
       color: 'FUCHSIA',
       icon: 'DATABASE'
@@ -325,7 +325,7 @@ export class LearningPathData implements InMemoryDbService {
     id: 6,
     number: 7,
     title: 'Securing our API',
-    description: '',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     styles: {
       color: 'ROSE',
       icon: 'LOCK'
@@ -378,7 +378,7 @@ export class LearningPathData implements InMemoryDbService {
     id: 7,
     number: 8,
     title: 'Deploying our API',
-    description: '',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     styles: {
       color: 'SKY',
       icon: 'PLANE'
