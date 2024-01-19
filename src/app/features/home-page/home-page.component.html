@@ -1,4 +1,9 @@
 <ldnf-home-page-header></ldnf-home-page-header>
 <main class="mx-auto max-w-7xl sm:px-6 lg:px-8 py-6 sm:py-10 space-y-16 mb-14">
   <ldnf-home-page-progress-card></ldnf-home-page-progress-card>
+
+  <ul>
+    <li *ngFor="let module of learningPath?.modules" class="text-slate-200">{{ module.title }}</li>
+  </ul>
+
 </main>
