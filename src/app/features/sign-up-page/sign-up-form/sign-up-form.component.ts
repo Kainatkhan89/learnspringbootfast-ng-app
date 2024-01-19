@@ -91,4 +91,8 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
       this.showPasswordError = this.passwordControl.invalid && this.passwordControl.touched;
     });
   }
+
+  dismissError(): void {
+    this.errorMessage = '';
+  }
 }
