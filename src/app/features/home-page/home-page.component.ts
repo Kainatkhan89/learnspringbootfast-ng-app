@@ -12,6 +12,7 @@ import * as console from "console";
 import {error} from "@angular/compiler-cli/src/transformers/util";
 import {LoadingSpinnerComponent} from "../../shared/loading-spinner/loading-spinner.component";
 import {HomePageFooterComponent} from "./home-page-footer/home-page-footer.component";
+import {HomePageLearningPathComponent} from "./home-page-learning-path/home-page-learning-path.component";
 
 @Component({
   selector: 'ldnf-home-page',
@@ -23,7 +24,8 @@ import {HomePageFooterComponent} from "./home-page-footer/home-page-footer.compo
     NgIf,
     NgForOf,
     LoadingSpinnerComponent,
-    HomePageFooterComponent
+    HomePageFooterComponent,
+    HomePageLearningPathComponent
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'

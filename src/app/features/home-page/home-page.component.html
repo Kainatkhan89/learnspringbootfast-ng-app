@@ -1,13 +1,16 @@
 <ldnf-home-page-header></ldnf-home-page-header>
+
 <main class="mx-auto max-w-7xl sm:px-6 lg:px-8 py-6 sm:py-10 mb-14">
   <ldnf-loading-spinner *ngIf="isLoading" size="LARGE"></ldnf-loading-spinner>
 
   <div *ngIf="learningPath" class="space-y-16">
-    <ldnf-home-page-progress-card></ldnf-home-page-progress-card>
-    <ul>
-      <li *ngFor="let module of learningPath.modules" class="text-slate-200">{{ module.title }}</li>
-    </ul>
+    <div>
+      <ldnf-home-page-progress-card></ldnf-home-page-progress-card>
+    </div>
+    <div>
+      <ldnf-home-page-learning-path></ldnf-home-page-learning-path>
+    </div>
   </div>
-
 </main>
+
 <ldnf-home-page-footer></ldnf-home-page-footer>
