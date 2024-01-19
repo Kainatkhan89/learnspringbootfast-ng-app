@@ -3,6 +3,7 @@ import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Auth, createUserWithEmailAndPassword} from "@angular/fire/auth";
 import {NgClass, NgIf} from "@angular/common";
 import {Router} from "@angular/router";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'ldnf-sign-up-form',
@@ -64,4 +65,6 @@ export class SignUpFormComponent {
       }).catch(error => this.errorMessage = error);
     }
   }
+
+  protected readonly error = error;
 }
