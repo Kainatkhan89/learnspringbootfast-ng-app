@@ -65,6 +65,4 @@ export class SignUpFormComponent {
       }).catch(error => this.errorMessage = error);
     }
   }
-
-  protected readonly error = error;
 }
