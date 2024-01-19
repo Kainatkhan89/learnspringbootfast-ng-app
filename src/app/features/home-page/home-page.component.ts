@@ -10,6 +10,7 @@ import {Subscription} from "rxjs";
 import {data} from "autoprefixer";
 import * as console from "console";
 import {error} from "@angular/compiler-cli/src/transformers/util";
+import {LoadingSpinnerComponent} from "../../shared/loading-spinner/loading-spinner.component";
 
 @Component({
   selector: 'ldnf-home-page',
@@ -19,7 +20,8 @@ import {error} from "@angular/compiler-cli/src/transformers/util";
     HomePageHeaderComponent,
     HomePageProgressCardComponent,
     NgIf,
-    NgForOf
+    NgForOf,
+    LoadingSpinnerComponent
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
@@ -29,12 +31,19 @@ export class HomePageComponent implements OnInit, OnDestroy {
   private _getLearningPathSubscription: Subscription | undefined;
 
   learningPath: ILearningPath | undefined;
+  isLoading: boolean = true;
   errorOccurred: boolean = false;
 
   ngOnInit(): void {
     this._getLearningPathSubscription = this._learningPathService.getLearningPath().subscribe({
-      next: (data) => this.learningPath = data,
-      error: () => this.errorOccurred = true
+      next: (data) => {
+        this.learningPath = data
+        this.isLoading = false;
+      },
+      error: () => {
+        this.errorOccurred = true;
+        this.isLoading = false;
+      }
     });
   }
 
