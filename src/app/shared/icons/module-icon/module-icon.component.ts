@@ -19,19 +19,63 @@ export class ModuleIconComponent {
   @Input() icon : "BOOK" | "FLAG" | "TERMINAL" | "WARNING" | "SHIELD" | "DATABASE" | "LOCK" | "PLANE" | undefined;
   @Input() size: "SMALL" | "LARGE" | undefined;
 
-  get colorStyles(): string {
-    const lowerCaseColor: string = this.color ? this.color.toLowerCase() : '';
-    const textColorLevel: string = (this.color === "FUCHSIA" || this.color === 'ROSE' || this.color === 'SKY') ? '600' : '700';
+  // get colorStyles(): string {
+  //   const lowerCaseColor: string = this.color ? this.color.toLowerCase() : '';
+  //   const textColorLevel: string = (this.color === "FUCHSIA" || this.color === 'ROSE' || this.color === 'SKY') ? '600' : '700';
+  //
+  //   return `bg-${lowerCaseColor}-100/75 text-${lowerCaseColor}-${textColorLevel}`;
+  // }
+  // get sizeStyles(): string {
+  //   return this.size === 'LARGE' ? 'p-3' : 'p-1.5';
+  // }
+  //
+  // get colorAndSizeStyles(): string {
+  //   console.log(this.colorStyles + ' ' + this.sizeStyles);
+  //
+  //   return this.colorStyles + ' ' + this.sizeStyles;
+  // }
 
-    return `bg-${lowerCaseColor}-100/75 text-${lowerCaseColor}-${textColorLevel}`;
+  get colorAndSizeStyles(): string {
+    console.log(this.colorStyles + ' ' + this.sizeStyles);
+    return this.colorStyles + ' ' + this.sizeStyles;
   }
+
   get sizeStyles(): string {
     return this.size === 'LARGE' ? 'p-3' : 'p-1.5';
   }
 
-  get colorAndSizeStyles(): string {
-    console.log(this.colorStyles + ' ' + this.sizeStyles);
+  get colorStyles(): string {
+    let colorStyleClasses: string = '';
 
-    return this.colorStyles + ' ' + this.sizeStyles;
+    switch (this.color) {
+      case "INDIGO":
+        colorStyleClasses = 'bg-indigo-100/75 text-indigo-700';
+        break;
+      case "TEAL":
+        colorStyleClasses = 'bg-teal-100/75 text-teal-700';
+        break;
+      case "PURPLE":
+        colorStyleClasses = 'bg-purple-100/75 text-purple-700';
+        break;
+      case "PINK":
+        colorStyleClasses = 'bg-pink-100/75 text-pink-700';
+        break;
+      case "YELLOW":
+        colorStyleClasses = 'bg-yellow-100/75 text-yellow-700';
+        break;
+      case "FUCHSIA":
+        colorStyleClasses = 'bg-fuchsia-100/75 text-fuchsia-700';
+        break;
+      case "ROSE":
+        colorStyleClasses = 'bg-rose-100/75 text-rose-700';
+        break;
+      case "SKY":
+        colorStyleClasses = 'bg-sky-100/75 text-sky-700';
+        break;
+      default:
+        colorStyleClasses = '';
+    }
+
+    return colorStyleClasses;
   }
 }

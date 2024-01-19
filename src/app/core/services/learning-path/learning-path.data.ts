@@ -335,7 +335,7 @@ export class LearningPathData implements InMemoryDbService {
         id: 0,
         moduleId: 0,
         title: 'Lorem Ipsum Tutorial',
-        durationSeconds: 7200,
+        durationSeconds: 90,
         completed: false,
         videoUrl: '',
         startFilesUrl: '',

@@ -16,9 +16,36 @@ export class PillComponent {
   @Input() text : string | undefined;
 
   get colorStyles(): string {
-    const lowerCaseColor: string = this.color ? this.color.toLowerCase() : '';
-    const textColorLevel: string = (this.color === "FUCHSIA" || this.color === 'ROSE' || this.color === 'SKY') ? '600' : '700';
+    let colorStyleClasses: string = '';
+    switch (this.color) {
+      case "INDIGO":
+        colorStyleClasses = 'bg-indigo-100/75 text-indigo-700 ring-indigo-600/20';
+        break;
+      case "TEAL":
+        colorStyleClasses = 'bg-teal-100/75 text-teal-700 ring-teal-600/20';
+        break;
+      case "PURPLE":
+        colorStyleClasses = 'bg-purple-100/75 text-purple-700 ring-purple-600/20';
+        break;
+      case "PINK":
+        colorStyleClasses = 'bg-pink-100/75 text-pink-700 ring-pink-600/20';
+        break;
+      case "YELLOW":
+        colorStyleClasses = 'bg-yellow-100/75 text-yellow-700 ring-yellow-600/20';
+        break;
+      case "FUCHSIA":
+        colorStyleClasses = 'bg-fuchsia-100/75 text-fuchsia-600 ring-fuchsia-600/20';
+        break;
+      case "ROSE":
+        colorStyleClasses = 'bg-rose-100/75 text-rose-600 ring-rose-600/20';
+        break;
+      case "SKY":
+        colorStyleClasses = 'bg-sky-100/75 text-sky-600 ring-sky-600/20';
+        break;
+      default:
+        colorStyleClasses = '';
+    }
 
-    return `bg-${lowerCaseColor}-100/75 text-${lowerCaseColor}-${textColorLevel} ring-${lowerCaseColor}-600/20`;
+    return colorStyleClasses;
   }
 }
