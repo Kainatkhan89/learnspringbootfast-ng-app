@@ -12,10 +12,10 @@ import {NgClass} from "@angular/common";
 })
 export class PillComponent {
 
-  @Input() color: "INDIGO" | "TEAL" | "PURPLE" | "PINK" | "YELLOW" | "FUCHSIA" | "ROSE" | "SKY" | undefined = "INDIGO";
+  @Input() color: "INDIGO" | "TEAL" | "PURPLE" | "PINK" | "YELLOW" | "FUCHSIA" | "ROSE" | "SKY" | undefined;
   @Input() text : string | undefined;
 
-  get colorStyle(): string {
+  get colorStyles(): string {
     const lowerCaseColor: string = this.color ? this.color.toLowerCase() : '';
     const textColorLevel: string = (this.color === "FUCHSIA" || this.color === 'ROSE' || this.color === 'SKY') ? '600' : '700';
 

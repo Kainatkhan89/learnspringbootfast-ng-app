@@ -15,7 +15,7 @@ import {NgClass, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
 })
 export class ModuleIconComponent {
 
-  @Input() color: "INDIGO" | "TEAL" | "PURPLE" | "PINK" | "YELLOW" | "FUCHSIA" | "ROSE" | "SKY" | undefined = "INDIGO";
+  @Input() color: "INDIGO" | "TEAL" | "PURPLE" | "PINK" | "YELLOW" | "FUCHSIA" | "ROSE" | "SKY" | undefined;
   @Input() icon : "BOOK" | "FLAG" | "TERMINAL" | "WARNING" | "SHIELD" | "DATABASE" | "LOCK" | "PLANE" | undefined;
   @Input() size: "SMALL" | "LARGE" | undefined;
 
@@ -30,6 +30,8 @@ export class ModuleIconComponent {
   }
 
   get colorAndSizeStyles(): string {
+    console.log(this.colorStyles + ' ' + this.sizeStyles);
+
     return this.colorStyles + ' ' + this.sizeStyles;
   }
 }
