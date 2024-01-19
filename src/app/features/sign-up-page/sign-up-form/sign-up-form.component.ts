@@ -1,8 +1,9 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Auth, createUserWithEmailAndPassword} from "@angular/fire/auth";
 import {NgClass, NgIf} from "@angular/common";
 import {Router} from "@angular/router";
+import {debounceTime, distinctUntilChanged, Subscription} from "rxjs";
 
 @Component({
   selector: 'ldnf-sign-up-form',
@@ -15,10 +16,14 @@ import {Router} from "@angular/router";
   templateUrl: './sign-up-form.component.html',
   styleUrl: './sign-up-form.component.css'
 })
-export class SignUpFormComponent {
+export class SignUpFormComponent implements OnInit, OnDestroy {
   private _formBuilder: FormBuilder = inject(FormBuilder);
   private _auth: Auth = inject(Auth);
   private _router: Router = inject(Router);
+
+  private _emailControlSubscription: Subscription | undefined;
+  private _passwordControlSubscription: Subscription | undefined;
+
 
   enabledButtonClasses: string = 'flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600';
   disabledButtonClasses: string = 'flex w-full justify-center rounded-md bg-indigo-600 opacity-50 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm cursor-not-allowed';
@@ -29,6 +34,18 @@ export class SignUpFormComponent {
   });
 
   errorMessage: string = '';
+  showEmailError: boolean = false;
+  showPasswordError: boolean = false;
+
+  ngOnInit() {
+    this._emailControlSubscription = this.subscribeToEmailControlValueChange();
+    this._passwordControlSubscription = this.subscribeToPasswordControlValueChange();
+  }
+
+  ngOnDestroy(){
+    this._emailControlSubscription?.unsubscribe();
+    this._passwordControlSubscription?.unsubscribe();
+  }
 
   get emailControl() {
     return this.signUpForm.controls['email'];
@@ -46,14 +63,6 @@ export class SignUpFormComponent {
     return this.passwordControl.errors;
   }
 
-  get emailIsInvalid() {
-    return this.emailControl.invalid && (this.emailControl.dirty || this.emailControl.touched);
-  }
-
-  get passwordIsInvalid() {
-    return this.passwordControl.invalid && (this.passwordControl.dirty || this.passwordControl.touched);
-  }
-
   async signUp() {
     if (this.signUpForm.valid) {
       const email: string = this.emailControl.value ?? '';
@@ -63,5 +72,23 @@ export class SignUpFormComponent {
         this._router.navigate(['/home']);
       }).catch(error => this.errorMessage = error);
     }
+  }
+
+  subscribeToEmailControlValueChange(): Subscription {
+    return this.emailControl.valueChanges.pipe(
+      debounceTime(500),
+      distinctUntilChanged()
+    ).subscribe(value => {
+      this.showEmailError = this.emailControl.invalid && this.emailControl.touched;
+    });
+  }
+
+  subscribeToPasswordControlValueChange(): Subscription {
+    return this.passwordControl.valueChanges.pipe(
+      debounceTime(500),
+      distinctUntilChanged()
+    ).subscribe(value => {
+      this.showPasswordError = this.passwordControl.invalid && this.passwordControl.touched;
+    });
   }
 }
