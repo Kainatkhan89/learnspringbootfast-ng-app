@@ -2,6 +2,7 @@ import {Component, inject} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Auth, createUserWithEmailAndPassword} from "@angular/fire/auth";
 import {NgClass, NgIf} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'ldnf-sign-up-form',
@@ -17,6 +18,7 @@ import {NgClass, NgIf} from "@angular/common";
 export class SignUpFormComponent {
   private _formBuilder: FormBuilder = inject(FormBuilder);
   private _auth: Auth = inject(Auth);
+  private _router: Router = inject(Router);
 
   enabledButtonClasses: string = 'flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600';
   disabledButtonClasses: string = 'flex w-full justify-center rounded-md bg-indigo-600 opacity-50 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm cursor-not-allowed';
@@ -26,7 +28,7 @@ export class SignUpFormComponent {
     password: ['', [Validators.required, Validators.minLength(6)]]
   });
 
-  showError: boolean = false;
+  errorMessage: string = '';
 
   get emailControl() {
     return this.signUpForm.controls['email'];
@@ -53,15 +55,13 @@ export class SignUpFormComponent {
   }
 
   async signUp() {
-    if (this.signUpForm.valid && this.signUpForm.value) {
-      try {
-        const email = this.emailControl.value ?? '';
-        const password = this.passwordControl.value ?? '';
+    if (this.signUpForm.valid) {
+      const email: string = this.emailControl.value ?? '';
+      const password: string = this.passwordControl.value ?? '';
 
-        await createUserWithEmailAndPassword(this._auth, email, password);
-      } catch (error) {
-        console.log(error);
-      }
+      createUserWithEmailAndPassword(this._auth, email, password).then(() => {
+        this._router.navigate(['/home']);
+      }).catch(error => this.errorMessage = error);
     }
   }
 }
