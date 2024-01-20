@@ -5,6 +5,7 @@ import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angula
 import {NgClass, NgIf} from "@angular/common";
 import {Auth, sendPasswordResetEmail} from "@angular/fire/auth";
 import {debounceTime, Subscription} from "rxjs";
+import {AlertPanelComponent} from "../../../shared/alert-panel/alert-panel.component";
 
 @Component({
   selector: 'ldnf-forgot-password-form',
@@ -14,7 +15,8 @@ import {debounceTime, Subscription} from "rxjs";
     NgIf,
     ReactiveFormsModule,
     RouterLink,
-    NgClass
+    NgClass,
+    AlertPanelComponent
 
   ],
   templateUrl: './forgot-password-form.component.html',
@@ -24,15 +26,14 @@ export class ForgotPasswordFormComponent implements  OnInit, OnDestroy {
 
   private _formBuilder: FormBuilder = inject(FormBuilder);
   private _auth: Auth = inject(Auth);
-  private _router: Router = inject(Router);
 
   private _emailControlSubscription: Subscription | undefined;
 
   enabledButtonClasses: string = 'flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600';
   disabledButtonClasses: string = 'flex w-full justify-center rounded-md bg-indigo-600 opacity-50 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm cursor-not-allowed';
 
-  errorMessage: string = '';
   showEmailError: boolean = false;
+  emailSent: boolean = false;
 
   ngOnInit(): void {
     this.subscribeToEmailControlValueChange();
@@ -50,8 +51,11 @@ export class ForgotPasswordFormComponent implements  OnInit, OnDestroy {
     return this.emailControl.errors;
   }
 
+  get emailSentMessage(): string {
+    return `Password reset link has been sent to ${this.emailControl.value}`;
+  }
   dismissError(): void {
-    this.errorMessage = '';
+
   }
 
   forgotPasswordForm = this._formBuilder.group({
@@ -62,8 +66,8 @@ export class ForgotPasswordFormComponent implements  OnInit, OnDestroy {
       const email: string = this.emailControl.value ?? '';
 
       sendPasswordResetEmail(this._auth, email).then(() => {
-       console.log("email sent");
-      }).catch(error => this.errorMessage = error);
+        this.emailSent = true;
+      });
     }
   }
 
