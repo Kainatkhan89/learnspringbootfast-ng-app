@@ -2,7 +2,7 @@ import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgClass, NgIf} from "@angular/common";
 import {Auth, signInWithEmailAndPassword} from "@angular/fire/auth";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {debounceTime, Subscription} from "rxjs";
 
 @Component({
@@ -11,7 +11,8 @@ import {debounceTime, Subscription} from "rxjs";
   imports: [
     NgIf,
     ReactiveFormsModule,
-    NgClass
+    NgClass,
+    RouterLink
   ],
   templateUrl: './sign-in-form.component.html',
   styleUrl: './sign-in-form.component.css'

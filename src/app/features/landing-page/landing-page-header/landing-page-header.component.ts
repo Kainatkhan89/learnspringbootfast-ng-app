@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import {LogoComponent} from "../../../shared/logo/logo.component";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'ldnf-landing-page-header',
   standalone: true,
-    imports: [
-        LogoComponent
-    ],
+  imports: [
+    LogoComponent,
+    RouterLink
+  ],
   templateUrl: './landing-page-header.component.html',
   styleUrl: './landing-page-header.component.css'
 })
