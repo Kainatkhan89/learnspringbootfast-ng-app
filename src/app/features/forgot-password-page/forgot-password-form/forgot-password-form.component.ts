@@ -1,6 +1,5 @@
 import {Component, inject, OnDestroy, OnInit} from '@angular/core';
-import {LogoComponent} from "../../../shared/logo/logo.component";
-import {Router, RouterLink} from "@angular/router";
+import {RouterLink} from "@angular/router";
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgClass, NgIf} from "@angular/common";
 import {Auth, sendPasswordResetEmail} from "@angular/fire/auth";
@@ -54,9 +53,6 @@ export class ForgotPasswordFormComponent implements  OnInit, OnDestroy {
   get emailSentMessage(): string {
     return `Password reset link has been sent to ${this.emailControl.value}`;
   }
-  dismissError(): void {
-
-  }
 
   forgotPasswordForm = this._formBuilder.group({
     email: ['', [Validators.required, Validators.email]]
@@ -69,6 +65,11 @@ export class ForgotPasswordFormComponent implements  OnInit, OnDestroy {
         this.emailSent = true;
       });
     }
+  }
+
+  handleAlertClose() {
+    this.emailSent = false;
+    this.forgotPasswordForm.reset();
   }
 
   subscribeToEmailControlValueChange(): void {

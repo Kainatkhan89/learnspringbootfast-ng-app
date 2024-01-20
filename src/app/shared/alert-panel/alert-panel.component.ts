@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgClass, NgIf} from "@angular/common";
 
 @Component({
@@ -14,6 +14,11 @@ import {NgClass, NgIf} from "@angular/common";
 export class AlertPanelComponent {
   @Input() type: "INFO" | "SUCCESS" | "WARNING" | "ERROR" = "INFO";
   @Input() message: string = '';
+  @Output() closeAlert: EventEmitter<void> = new EventEmitter<void>();
+
+  get headingText(): string {
+    return this.type.charAt(0).toUpperCase() + this.type.slice(1).toLowerCase();
+  }
 
   get backgroundStyles(): string {
     let backgroundStyleClasses: string = '';
@@ -136,6 +141,6 @@ export class AlertPanelComponent {
   }
 
   closePanel(): void {
-
+    this.closeAlert.emit();
   }
 }
