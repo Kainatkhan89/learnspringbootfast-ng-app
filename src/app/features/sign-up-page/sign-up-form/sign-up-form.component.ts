@@ -76,19 +76,17 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
 
   subscribeToEmailControlValueChange(): Subscription {
     return this.emailControl.valueChanges.pipe(
-      debounceTime(500),
-      distinctUntilChanged()
+      debounceTime(1000)
     ).subscribe(value => {
-      this.showEmailError = this.emailControl.invalid && this.emailControl.touched;
+      this.showEmailError = this.emailControl.invalid && this.emailControl.dirty;
     });
   }
 
   subscribeToPasswordControlValueChange(): Subscription {
     return this.passwordControl.valueChanges.pipe(
-      debounceTime(500),
-      distinctUntilChanged()
+      debounceTime(1000)
     ).subscribe(value => {
-      this.showPasswordError = this.passwordControl.invalid && this.passwordControl.touched;
+      this.showPasswordError = this.passwordControl.invalid && this.passwordControl.dirty;
     });
   }
 
