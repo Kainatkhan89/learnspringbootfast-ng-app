@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import {LogoComponent} from "../../shared/logo/logo.component";
 import {SignUpFormComponent} from "../sign-up-page/sign-up-form/sign-up-form.component";
+import {SignInFormComponent} from "./sign-in-form/sign-in-form.component";
 
 @Component({
   selector: 'ldnf-sign-in-page',
   standalone: true,
   imports: [
-    LogoComponent
+    LogoComponent,
+    SignInFormComponent
   ],
   templateUrl: './sign-in-page.component.html',
   styleUrl: './sign-in-page.component.css'
