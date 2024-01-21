@@ -14,8 +14,6 @@ export class LearningPathService {
   constructor() { }
 
   getLearningPath(): Observable<ILearningPath> {
-    return this._httpClient.get<ILearningPath>(this._learningPathApi).pipe(
-      tap(data => console.log(data))
-    );
+    return this._httpClient.get<ILearningPath>(this._learningPathApi);
   }
 }

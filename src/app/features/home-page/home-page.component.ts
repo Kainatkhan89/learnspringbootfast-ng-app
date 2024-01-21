@@ -3,17 +3,14 @@ import {LogoComponent} from "../../shared/logo/logo.component";
 import {HomePageHeaderComponent} from "./home-page-header/home-page-header.component";
 import {HomePageProgressCardComponent} from "./home-page-progress-card/home-page-progress-card.component";
 import {LearningPathService} from "../../core/services/learning-path/learning-path.service";
-import {LearningPathData} from "../../core/services/learning-path/learning-path.data";
 import {ILearningPath} from "../../core/models/learning-path/learning-path.model";
 import {NgForOf, NgIf} from "@angular/common";
 import {Subscription} from "rxjs";
-import {data} from "autoprefixer";
-import * as console from "console";
-import {error} from "@angular/compiler-cli/src/transformers/util";
 import {LoadingSpinnerComponent} from "../../shared/loading-spinner/loading-spinner.component";
 import {HomePageFooterComponent} from "./home-page-footer/home-page-footer.component";
 import {HomePageLearningPathComponent} from "./home-page-learning-path/home-page-learning-path.component";
 import {AlertPanelComponent} from "../../shared/alert-panel/alert-panel.component";
+import {UserService} from "../../core/services/user/user.service";
 
 @Component({
   selector: 'ldnf-home-page',
@@ -35,6 +32,8 @@ import {AlertPanelComponent} from "../../shared/alert-panel/alert-panel.componen
 export class HomePageComponent implements OnInit, OnDestroy {
   private _learningPathService: LearningPathService = inject(LearningPathService);
   private _getLearningPathSubscription: Subscription | undefined;
+
+  private _userService: UserService = inject(UserService);
 
   learningPath: ILearningPath | undefined;
   isLoading: boolean = true;
