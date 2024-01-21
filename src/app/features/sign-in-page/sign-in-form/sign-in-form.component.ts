@@ -4,6 +4,7 @@ import {NgClass, NgIf} from "@angular/common";
 import {Auth, signInWithEmailAndPassword} from "@angular/fire/auth";
 import {Router, RouterLink} from "@angular/router";
 import {debounceTime, Subscription} from "rxjs";
+import {AlertPanelComponent} from "../../../shared/alert-panel/alert-panel.component";
 
 @Component({
   selector: 'ldnf-sign-in-form',
@@ -12,7 +13,8 @@ import {debounceTime, Subscription} from "rxjs";
     NgIf,
     ReactiveFormsModule,
     NgClass,
-    RouterLink
+    RouterLink,
+    AlertPanelComponent
   ],
   templateUrl: './sign-in-form.component.html',
   styleUrl: './sign-in-form.component.css'
@@ -76,6 +78,11 @@ export class SignInFormComponent implements  OnInit, OnDestroy {
         this._router.navigate(['/home']);
       }).catch(error => this.errorMessage = error);
     }
+  }
+
+  handleAlertClose() {
+    this.errorMessage = '';
+    this.signInForm.reset();
   }
 
   subscribeToEmailControlValueChange(): void {
