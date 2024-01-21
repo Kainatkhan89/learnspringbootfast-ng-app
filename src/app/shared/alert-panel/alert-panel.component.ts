@@ -13,12 +13,9 @@ import {NgClass, NgIf} from "@angular/common";
 })
 export class AlertPanelComponent {
   @Input() type: "INFO" | "SUCCESS" | "WARNING" | "ERROR" = "INFO";
+  @Input() headingText: string = '';
   @Input() message: string = '';
   @Output() closeAlert: EventEmitter<void> = new EventEmitter<void>();
-
-  get headingText(): string {
-    return this.type.charAt(0).toUpperCase() + this.type.slice(1).toLowerCase();
-  }
 
   get backgroundStyles(): string {
     let backgroundStyleClasses: string = '';
