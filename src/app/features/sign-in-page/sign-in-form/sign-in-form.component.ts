@@ -30,7 +30,7 @@ export class SignInFormComponent implements  OnInit, OnDestroy {
   enabledButtonClasses: string = 'flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600';
   disabledButtonClasses: string = 'flex w-full justify-center rounded-md bg-indigo-600 opacity-50 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm cursor-not-allowed';
 
-  errorMessage: string = '';
+  private _errorMessage: string = '';
   showEmailError: boolean = false;
 
   ngOnInit(): void {
@@ -39,6 +39,18 @@ export class SignInFormComponent implements  OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._emailControlSubscription?.unsubscribe();
+  }
+
+  get errorMessage(): string {
+    return this._errorMessage;
+  }
+
+  set errorMessage(error: string) {
+    if (error.toLowerCase().includes("invalid-credential")) {
+      this._errorMessage = "Incorrect email or password.";
+    } else {
+      this._errorMessage = error;
+    }
   }
 
   signInForm = this._formBuilder.group({
@@ -66,9 +78,6 @@ export class SignInFormComponent implements  OnInit, OnDestroy {
     return this.passwordControl.invalid && this.passwordControl.dirty;
   }
 
-  dismissError(): void {
-    this.errorMessage = '';
-  }
   async signIn() {
     if (this.signInForm.valid) {
       const email: string = this.emailControl.value ?? '';
@@ -76,7 +85,7 @@ export class SignInFormComponent implements  OnInit, OnDestroy {
 
       signInWithEmailAndPassword(this._auth, email, password).then(() => {
         this._router.navigate(['/home']);
-      }).catch(error => this.errorMessage = error);
+      }).catch(error => this.errorMessage = error.message);
     }
   }
 
