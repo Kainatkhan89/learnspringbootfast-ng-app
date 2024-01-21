@@ -48,6 +48,8 @@ export class SignInFormComponent implements  OnInit, OnDestroy {
   set errorMessage(error: string) {
     if (error.toLowerCase().includes("invalid-credential")) {
       this._errorMessage = "Incorrect email or password.";
+    } else if (error.toLowerCase().includes("too-many-requests")) {
+      this._errorMessage = "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later."
     } else {
       this._errorMessage = error;
     }
