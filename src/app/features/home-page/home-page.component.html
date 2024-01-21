@@ -1,6 +1,11 @@
 <ldnf-home-page-header></ldnf-home-page-header>
 
 <main class="mx-auto max-w-7xl sm:px-6 lg:px-8 py-6 sm:py-10 mb-14">
+  <ldnf-alert-panel *ngIf="errorOccurred" type="ERROR" headingText="Error"
+                    message="An error occured while loading your learning path data."
+                    (closeAlert)="handleAlertClose()"
+  ></ldnf-alert-panel>
+
   <ldnf-loading-spinner *ngIf="isLoading" size="LARGE"></ldnf-loading-spinner>
 
   <div *ngIf="learningPath" class="space-y-16">

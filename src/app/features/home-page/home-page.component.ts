@@ -13,6 +13,7 @@ import {error} from "@angular/compiler-cli/src/transformers/util";
 import {LoadingSpinnerComponent} from "../../shared/loading-spinner/loading-spinner.component";
 import {HomePageFooterComponent} from "./home-page-footer/home-page-footer.component";
 import {HomePageLearningPathComponent} from "./home-page-learning-path/home-page-learning-path.component";
+import {AlertPanelComponent} from "../../shared/alert-panel/alert-panel.component";
 
 @Component({
   selector: 'ldnf-home-page',
@@ -25,7 +26,8 @@ import {HomePageLearningPathComponent} from "./home-page-learning-path/home-page
     NgForOf,
     LoadingSpinnerComponent,
     HomePageFooterComponent,
-    HomePageLearningPathComponent
+    HomePageLearningPathComponent,
+    AlertPanelComponent
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
@@ -49,6 +51,10 @@ export class HomePageComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }
     });
+  }
+
+  handleAlertClose() {
+    this.errorOccurred = false;
   }
 
   ngOnDestroy(): void {
