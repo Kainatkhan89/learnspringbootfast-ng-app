@@ -32,7 +32,7 @@ export class ForgotPasswordFormComponent implements  OnInit, OnDestroy {
   disabledButtonClasses: string = 'flex w-full justify-center rounded-md bg-indigo-600 opacity-50 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm cursor-not-allowed';
 
   showEmailError: boolean = false;
-  emailSent: boolean = false;
+  emailSent: boolean = true;
 
   ngOnInit(): void {
     this.subscribeToEmailControlValueChange();

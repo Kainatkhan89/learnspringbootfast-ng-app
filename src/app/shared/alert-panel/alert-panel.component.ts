@@ -1,12 +1,14 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgClass, NgIf} from "@angular/common";
+import {AlertIconComponent} from "./alert-icon/alert-icon.component";
 
 @Component({
   selector: 'ldnf-alert-panel',
   standalone: true,
   imports: [
     NgIf,
-    NgClass
+    NgClass,
+    AlertIconComponent
   ],
   templateUrl: './alert-panel.component.html',
   styleUrl: './alert-panel.component.css'
@@ -109,6 +111,8 @@ export class AlertPanelComponent {
         messageStyleClasses = 'text-blue-700';
         break;
     }
+
+    messageStyleClasses += this.headingText ? ' mt-2' : '';
 
     return messageStyleClasses;
   }
