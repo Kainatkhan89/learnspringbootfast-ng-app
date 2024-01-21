@@ -1,0 +1,22 @@
+<div class="overflow-hidden sm:rounded-lg bg-gray-900">
+  <div class="flex flex-wrap items-center justify-between px-4 py-12 sm:p-6 gap-y-10">
+    <div class="w-full sm:w-1/2">
+     <ldnf-no-progress-welcome-message *ngIf="progressPercentage == 0; else resumeProgressMessageComponent"></ldnf-no-progress-welcome-message>
+      <ng-template #resumeProgressMessageComponent>
+        <ldnf-resume-progress-welcome-message></ldnf-resume-progress-welcome-message>
+      </ng-template>
+    </div>
+    <div class="w-full sm:w-1/2 flex items-center justify-center">
+      <svg class="transform -rotate-90 w-72 h-72">
+        <circle cx="145" cy="145" [attr.r]="RADIUS" stroke="currentColor" stroke-width="20" fill="transparent"
+                class="stroke-gray-950" />
+
+        <circle cx="145" cy="145" [attr.r]="RADIUS" stroke="currentColor" stroke-width="20" fill="transparent"
+                [attr.stroke-dasharray]="CIRCUMFERENCE"
+                [attr.stroke-dashoffset]="progressStrokeOffset"
+                class="stroke-green-500" />
+      </svg>
+      <span class="absolute font-bold leading-tight tracking-tight text-slate-200 text-5xl">{{progressPercentage}}%</span>
+    </div>
+  </div>
+</div>

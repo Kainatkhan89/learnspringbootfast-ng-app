@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "learndotnetfast": {
+      "hosting": {
+        "ldnf-ng-app": [
+          "learndotnetfast"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "learndotnetfast"
+  }
+}

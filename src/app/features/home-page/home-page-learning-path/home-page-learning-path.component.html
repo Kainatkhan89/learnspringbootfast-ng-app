@@ -1,0 +1,13 @@
+<div class="space-y-12">
+  <h2 class="text-3xl sm:text-4xl text-center sm:text-left font-extrabold tracking-tight text-slate-200">
+    <span class="text-orange-500">&#64;</span>
+    <span class="text-indigo-500">&#10100;</span>
+    Learning Path
+    <span class="text-indigo-500">&#10101;</span>
+  </h2>
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+    <div *ngFor="let module of learningPathData?.modules">
+      <ldnf-home-page-module-card [moduleData]="module"></ldnf-home-page-module-card>
+    </div>
+  </div>
+</div>
