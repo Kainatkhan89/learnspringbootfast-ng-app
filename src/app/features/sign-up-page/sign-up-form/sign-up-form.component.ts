@@ -3,7 +3,8 @@ import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Auth, createUserWithEmailAndPassword} from "@angular/fire/auth";
 import {NgClass, NgIf} from "@angular/common";
 import {Router} from "@angular/router";
-import {debounceTime, distinctUntilChanged, Subscription} from "rxjs";
+import {debounceTime, Subscription} from "rxjs";
+import {AlertPanelComponent} from "../../../shared/alert-panel/alert-panel.component";
 
 @Component({
   selector: 'ldnf-sign-up-form',
@@ -11,7 +12,8 @@ import {debounceTime, distinctUntilChanged, Subscription} from "rxjs";
   imports: [
     ReactiveFormsModule,
     NgIf,
-    NgClass
+    NgClass,
+    AlertPanelComponent
   ],
   templateUrl: './sign-up-form.component.html',
   styleUrl: './sign-up-form.component.css'
@@ -90,7 +92,8 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  dismissError(): void {
+  handleAlertClose() {
     this.errorMessage = '';
+    this.signUpForm.reset();
   }
 }
