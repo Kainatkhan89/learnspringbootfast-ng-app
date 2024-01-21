@@ -5,6 +5,7 @@ import {NgClass, NgIf} from "@angular/common";
 import {Router} from "@angular/router";
 import {debounceTime, Subscription} from "rxjs";
 import {AlertPanelComponent} from "../../../shared/alert-panel/alert-panel.component";
+import {equalTo} from "@angular/fire/database";
 
 @Component({
   selector: 'ldnf-sign-up-form',
@@ -35,7 +36,7 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
     password: ['', [Validators.required, Validators.minLength(6)]]
   });
 
-  errorMessage: string = '';
+  private _errorMessage: string = '';
   showEmailError: boolean = false;
   showPasswordError: boolean = false;
 
@@ -47,6 +48,18 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this._emailControlSubscription?.unsubscribe();
     this._passwordControlSubscription?.unsubscribe();
+  }
+
+  get errorMessage(): string {
+    return this._errorMessage;
+  }
+
+  set errorMessage(error: string) {
+    if (error.toLowerCase().includes("already-in-use")) {
+      this._errorMessage = "Account already exists. Please sign in.";
+    } else {
+      this._errorMessage = error;
+    }
   }
 
   get emailControl() {
@@ -72,7 +85,7 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
 
       createUserWithEmailAndPassword(this._auth, email, password).then(() => {
         this._router.navigate(['/home']);
-      }).catch(error => this.errorMessage = error);
+      }).catch(error => this.errorMessage = error.message);
     }
   }
 
