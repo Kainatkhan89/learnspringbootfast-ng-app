@@ -9,12 +9,14 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import {provideHttpClient} from "@angular/common/http";
 import {InMemoryWebApiModule} from "angular-in-memory-web-api";
 import {LearningPathData} from "./core/services/learning-path/learning-path.data";
+import {ProgressData} from "./core/services/progress/progress.data";
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(),
     importProvidersFrom(InMemoryWebApiModule.forRoot(LearningPathData, { delay: 1000 })),
+    importProvidersFrom(InMemoryWebApiModule.forRoot(ProgressData, { delay: 1000 })),
     importProvidersFrom(provideFirebaseApp(() => initializeApp({"projectId":"learndotnetfast","appId":"1:523066733452:web:5eab92ebb18500a1695ca9","storageBucket":"learndotnetfast.appspot.com","apiKey":"AIzaSyCPOxlp3Xt5eUuMDDgmE0cG3y4-ZpfPhmc","authDomain":"learndotnetfast.firebaseapp.com","messagingSenderId":"523066733452"}))),
     importProvidersFrom(provideAuth(() => getAuth())),
     importProvidersFrom(provideFirestore(() => getFirestore())),
