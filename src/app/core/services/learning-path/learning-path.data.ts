@@ -67,8 +67,8 @@ export class LearningPathData implements InMemoryDbService {
     },
     tutorials: [
       {
-        id: 0,
-        moduleId: 0,
+        id: 4,
+        moduleId: 1,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -77,8 +77,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 1,
-        moduleId: 0,
+        id: 5,
+        moduleId: 1,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -87,8 +87,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 2,
-        moduleId: 0,
+        id: 6,
+        moduleId: 1,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -97,8 +97,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 3,
-        moduleId: 0,
+        id: 7,
+        moduleId: 1,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -120,8 +120,8 @@ export class LearningPathData implements InMemoryDbService {
     },
     tutorials: [
       {
-        id: 0,
-        moduleId: 0,
+        id: 8,
+        moduleId: 2,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -130,8 +130,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 1,
-        moduleId: 0,
+        id: 9,
+        moduleId: 2,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -140,8 +140,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 2,
-        moduleId: 0,
+        id: 10,
+        moduleId: 2,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -150,8 +150,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 3,
-        moduleId: 0,
+        id: 11,
+        moduleId: 2,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -173,8 +173,8 @@ export class LearningPathData implements InMemoryDbService {
     },
     tutorials: [
       {
-        id: 0,
-        moduleId: 0,
+        id: 12,
+        moduleId: 3,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -183,8 +183,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 1,
-        moduleId: 0,
+        id: 13,
+        moduleId: 3,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -193,8 +193,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 2,
-        moduleId: 0,
+        id: 14,
+        moduleId: 3,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -203,8 +203,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 3,
-        moduleId: 0,
+        id: 15,
+        moduleId: 3,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -226,8 +226,8 @@ export class LearningPathData implements InMemoryDbService {
     },
     tutorials: [
       {
-        id: 0,
-        moduleId: 0,
+        id: 16,
+        moduleId: 4,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -236,8 +236,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 1,
-        moduleId: 0,
+        id: 17,
+        moduleId: 4,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -246,8 +246,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 2,
-        moduleId: 0,
+        id: 18,
+        moduleId: 4,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -256,8 +256,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 3,
-        moduleId: 0,
+        id: 19,
+        moduleId: 4,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -279,8 +279,8 @@ export class LearningPathData implements InMemoryDbService {
     },
     tutorials: [
       {
-        id: 0,
-        moduleId: 0,
+        id: 20,
+        moduleId: 5,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -289,8 +289,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 1,
-        moduleId: 0,
+        id: 21,
+        moduleId: 5,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -299,8 +299,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 2,
-        moduleId: 0,
+        id: 22,
+        moduleId: 5,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -309,8 +309,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 3,
-        moduleId: 0,
+        id: 23,
+        moduleId: 5,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -332,8 +332,8 @@ export class LearningPathData implements InMemoryDbService {
     },
     tutorials: [
       {
-        id: 0,
-        moduleId: 0,
+        id: 24,
+        moduleId: 6,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -342,8 +342,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 1,
-        moduleId: 0,
+        id: 25,
+        moduleId: 6,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -352,8 +352,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 2,
-        moduleId: 0,
+        id: 26,
+        moduleId: 6,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -362,8 +362,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 3,
-        moduleId: 0,
+        id: 27,
+        moduleId: 6,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -385,8 +385,8 @@ export class LearningPathData implements InMemoryDbService {
     },
     tutorials: [
       {
-        id: 0,
-        moduleId: 0,
+        id: 28,
+        moduleId: 7,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -395,8 +395,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 1,
-        moduleId: 0,
+        id: 29,
+        moduleId: 7,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -405,8 +405,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 2,
-        moduleId: 0,
+        id: 30,
+        moduleId: 7,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -415,8 +415,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 3,
-        moduleId: 0,
+        id: 31,
+        moduleId: 7,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
