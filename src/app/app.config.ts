@@ -9,7 +9,7 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import {provideHttpClient} from "@angular/common/http";
 import {InMemoryWebApiModule} from "angular-in-memory-web-api";
 import {LearningPathData} from "./core/services/learning-path/learning-path.data";
-import {ProgressData} from "./core/services/progress/progress.data";
+
 
 export const appConfig: ApplicationConfig = {
   providers: [

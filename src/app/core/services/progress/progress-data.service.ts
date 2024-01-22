@@ -29,6 +29,6 @@ export class ProgressDataService {
   }
 
   private _fetchUserProgressData(userId: string): Observable<IProgress> {
-    return this._httpClient.get<IProgress>(`${this._progressDataApi}/${userId}`);
+    return this._httpClient.get<IProgress>(this._progressDataApi);
   }
 }
