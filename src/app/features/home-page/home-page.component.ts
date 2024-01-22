@@ -11,6 +11,7 @@ import {HomePageFooterComponent} from "./home-page-footer/home-page-footer.compo
 import {HomePageLearningPathComponent} from "./home-page-learning-path/home-page-learning-path.component";
 import {AlertPanelComponent} from "../../shared/alert-panel/alert-panel.component";
 import {UserService} from "../../core/services/user/user.service";
+import {ProgressDataService} from "../../core/services/progress/progress-data.service";
 
 @Component({
   selector: 'ldnf-home-page',
@@ -31,16 +32,30 @@ import {UserService} from "../../core/services/user/user.service";
 })
 export class HomePageComponent implements OnInit, OnDestroy {
   private _learningPathService: LearningPathService = inject(LearningPathService);
-  private _getLearningPathSubscription: Subscription | undefined;
-
-  private _userService: UserService = inject(UserService);
+  private _progressDataService: ProgressDataService = inject(ProgressDataService);
+  private _learningPathSubscription: Subscription | undefined;
+  private _userProgressSubscription: Subscription | undefined;
 
   learningPath: ILearningPath | undefined;
   isLoading: boolean = true;
   errorOccurred: boolean = false;
 
   ngOnInit(): void {
-    this._getLearningPathSubscription = this._learningPathService.getLearningPath().subscribe({
+    this._learningPathSubscription = this._setupLearningPathSubscription();
+    this._userProgressSubscription = this._setupUserProgressSubscription();
+  }
+
+  handleAlertClose() {
+    this.errorOccurred = false;
+  }
+
+  ngOnDestroy(): void {
+    this._learningPathSubscription?.unsubscribe();
+    this._userProgressSubscription?.unsubscribe();
+  }
+
+  private _setupLearningPathSubscription(): Subscription {
+    return this._learningPathService.getLearningPath().subscribe({
       next: (data) => {
         this.learningPath = data
         this.isLoading = false;
@@ -52,11 +67,11 @@ export class HomePageComponent implements OnInit, OnDestroy {
     });
   }
 
-  handleAlertClose() {
-    this.errorOccurred = false;
-  }
-
-  ngOnDestroy(): void {
-    this._getLearningPathSubscription?.unsubscribe();
+  private _setupUserProgressSubscription(): Subscription {
+    return this._progressDataService.getUserProgress().subscribe({
+      next: (data) => {
+        console.log(data);
+      }
+    });
   }
 }

@@ -1,6 +1,7 @@
 import {InMemoryDbService} from "angular-in-memory-web-api";
 import {IModule} from "../../models/learning-path/module.model";
 import {ILearningPath} from "../../models/learning-path/learning-path.model";
+import {IProgress} from "../../models/progress/progress.model";
 
 export class LearningPathData implements InMemoryDbService {
   mockModule1: IModule = {
@@ -430,7 +431,12 @@ export class LearningPathData implements InMemoryDbService {
   learningPath: ILearningPath = { modules: [this.mockModule1, this.mockModule2, this.mockModule3, this.mockModule4,
     this.mockModule5, this.mockModule6, this.mockModule7, this.mockModule8] }
 
+  progressData: IProgress = {
+    userId: 'SnfKNtkKYsPIds52hGh9aTtSEb92',
+    completedTutorialIds: [0, 1, 2, 3]
+  };
+
   createDb() {
-    return {learningPath: this.learningPath};
+    return {learningPath: this.learningPath, progress: this.progressData};
   }
 }
