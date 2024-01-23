@@ -27,6 +27,7 @@ export class HomePageProgressCardComponent {
 
   @Input() progressPercentage: number | undefined;
   @Input() lastCompletedTutorial: ITutorial | undefined | null;
+  @Input() firstTutorial: ITutorial | undefined;
 
   get progressStrokeOffset(): number {
     return this.progressPercentage ? this.CIRCUMFERENCE - this.progressPercentage / 100 * this.CIRCUMFERENCE : this.CIRCUMFERENCE;

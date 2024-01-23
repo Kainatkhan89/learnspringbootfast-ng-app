@@ -48,6 +48,10 @@ export class HomePageComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
   errorOccurred: boolean = false;
 
+  get firstTutorial(): ITutorial | undefined {
+    return this.learningPath?.modules[0].tutorials[0];
+  }
+
   ngOnInit(): void {
     this._userLearningDataSubscription = this._subscribeToUserLearningData();
     this._progressPercentageSubscription = this._subscribeToProgressPercentage();
