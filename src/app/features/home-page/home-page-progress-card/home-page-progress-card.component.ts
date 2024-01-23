@@ -5,6 +5,7 @@ import {NgIf} from "@angular/common";
 import {
   ResumeProgressWelcomeMessageComponent
 } from "../resume-progress-welcome-message/resume-progress-welcome-message.component";
+import {ITutorial} from "../../../core/models/learning-path/tutorial.model";
 
 @Component({
   selector: 'ldnf-home-page-progress-card',

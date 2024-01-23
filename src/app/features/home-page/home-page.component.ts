@@ -13,6 +13,7 @@ import {AlertPanelComponent} from "../../shared/alert-panel/alert-panel.componen
 import {UserService} from "../../core/services/user/user.service";
 import {ProgressDataService} from "../../core/services/progress/progress-data.service";
 import {UserLearningDataService} from "../../core/services/user-learning-data/user-learning-data.service";
+import {ITutorial} from "../../core/models/learning-path/tutorial.model";
 
 @Component({
   selector: 'ldnf-home-page',
@@ -39,6 +40,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
   private _userLearningDataSubscription: Subscription | undefined;
 
   progressPercentage$: Observable<number> = of(0);
+  lastCompletedTutorial$: Observable<ITutorial | null> | undefined;
+
   learningPath: ILearningPath | undefined;
   isLoading: boolean = true;
   errorOccurred: boolean = false;
@@ -47,6 +50,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._userLearningDataSubscription = this._subscribeToUserLearningData();
     this.progressPercentage$ = this._progressDataService.progressPercentage$;
+    this._userLearningDataService.lastCompletedTutorial$?.subscribe((tutorial) => console.log(tutorial));
   }
 
   ngOnDestroy(): void {
