@@ -7,7 +7,7 @@ export class LearningPathData implements InMemoryDbService {
   mockModule1: IModule = {
     id: 0,
     number: 1,
-    title: 'Spring Boot: The Concepts',
+    title: 'ASP .NET: The Concepts',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     styles: {
       color: 'INDIGO',
