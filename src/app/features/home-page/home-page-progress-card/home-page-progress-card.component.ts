@@ -25,10 +25,10 @@ export class HomePageProgressCardComponent {
   readonly RADIUS: number = 120;
   readonly CIRCUMFERENCE: number = 2 * 22 / 7 * this.RADIUS;
 
-  @Input() progressPercentage: number = 0;
+  @Input() progressPercentage: number | undefined;
   @Input() lastCompletedTutorial: ITutorial | undefined | null;
 
   get progressStrokeOffset(): number {
-    return this.CIRCUMFERENCE - this.progressPercentage / 100 * this.CIRCUMFERENCE;
+    return this.progressPercentage ? this.CIRCUMFERENCE - this.progressPercentage / 100 * this.CIRCUMFERENCE : this.CIRCUMFERENCE;
   }
 }
