@@ -8,6 +8,7 @@ import {
 import {ITutorial} from "../../../core/models/learning-path/tutorial.model";
 import {ProgressDataService} from "../../../core/services/progress/progress-data.service";
 import {Observable, of, Subscription} from "rxjs";
+import {PercentageFormatPipe} from "../../../core/pipes/percentage-format/percentage-format.pipe";
 
 @Component({
   selector: 'ldnf-home-page-progress-card',
@@ -17,6 +18,7 @@ import {Observable, of, Subscription} from "rxjs";
     NoProgressWelcomeMessageComponent,
     NgIf,
     ResumeProgressWelcomeMessageComponent,
+    PercentageFormatPipe,
   ],
   templateUrl: './home-page-progress-card.component.html',
   styleUrl: './home-page-progress-card.component.css'
