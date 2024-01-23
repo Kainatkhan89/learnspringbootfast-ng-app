@@ -16,7 +16,7 @@
                 [attr.stroke-dashoffset]="progressStrokeOffset"
                 class="stroke-green-500" />
       </svg>
-      <span class="absolute font-bold leading-tight tracking-tight text-slate-200 text-5xl">{{progressPercentage}}%</span>
+      <span class="absolute font-bold leading-tight tracking-tight text-slate-200 text-5xl">{{progressPercentage | percentageFormat}}</span>
     </div>
   </div>
 </div>
