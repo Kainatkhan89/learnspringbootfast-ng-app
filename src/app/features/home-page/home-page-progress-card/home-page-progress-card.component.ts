@@ -19,10 +19,12 @@ import {
   styleUrl: './home-page-progress-card.component.css'
 })
 export class HomePageProgressCardComponent {
-  @Input() progressPercentage: number = 50;
+  @Input() progressPercentage: number = 0;
 
   readonly RADIUS: number = 120;
   readonly CIRCUMFERENCE: number = 2 * 22 / 7 * this.RADIUS;
 
-  progressStrokeOffset: number = this.CIRCUMFERENCE - this.progressPercentage / 100 * this.CIRCUMFERENCE;
+  get progressStrokeOffset(): number {
+    return this.CIRCUMFERENCE - this.progressPercentage / 100 * this.CIRCUMFERENCE;
+  }
 }

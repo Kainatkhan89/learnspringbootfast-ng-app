@@ -8,9 +8,9 @@
 
   <ldnf-loading-spinner *ngIf="isLoading" size="LARGE"></ldnf-loading-spinner>
 
-  <div *ngIf="learningPath" class="space-y-16">
+  <div *ngIf="learningPath && progressPercentage$ | async as progressPercentage" class="space-y-16">
     <div>
-      <ldnf-home-page-progress-card></ldnf-home-page-progress-card>
+      <ldnf-home-page-progress-card [progressPercentage]="progressPercentage"></ldnf-home-page-progress-card>
     </div>
     <div>
       <ldnf-home-page-learning-path [learningPathData] = "learningPath" ></ldnf-home-page-learning-path>

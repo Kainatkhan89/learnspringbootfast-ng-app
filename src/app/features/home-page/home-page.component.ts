@@ -4,8 +4,8 @@ import {HomePageHeaderComponent} from "./home-page-header/home-page-header.compo
 import {HomePageProgressCardComponent} from "./home-page-progress-card/home-page-progress-card.component";
 import {LearningPathService} from "../../core/services/learning-path/learning-path.service";
 import {ILearningPath} from "../../core/models/learning-path/learning-path.model";
-import {NgForOf, NgIf} from "@angular/common";
-import {Subscription} from "rxjs";
+import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
+import {defaultIfEmpty, Observable, of, Subscription} from "rxjs";
 import {LoadingSpinnerComponent} from "../../shared/loading-spinner/loading-spinner.component";
 import {HomePageFooterComponent} from "./home-page-footer/home-page-footer.component";
 import {HomePageLearningPathComponent} from "./home-page-learning-path/home-page-learning-path.component";
@@ -26,26 +26,27 @@ import {UserLearningDataService} from "../../core/services/user-learning-data/us
     LoadingSpinnerComponent,
     HomePageFooterComponent,
     HomePageLearningPathComponent,
-    AlertPanelComponent
+    AlertPanelComponent,
+    AsyncPipe
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })
 export class HomePageComponent implements OnInit, OnDestroy {
   private _userLearningDataService: UserLearningDataService = inject(UserLearningDataService);
+  private _progressDataService: ProgressDataService = inject(ProgressDataService);
 
   private _userLearningDataSubscription: Subscription | undefined;
 
+  progressPercentage$: Observable<number> = of(0);
   learningPath: ILearningPath | undefined;
   isLoading: boolean = true;
   errorOccurred: boolean = false;
 
+
   ngOnInit(): void {
     this._userLearningDataSubscription = this._subscribeToUserLearningData();
-  }
-
-  handleAlertClose() {
-    this.errorOccurred = false;
+    this.progressPercentage$ = this._progressDataService.progressPercentage$;
   }
 
   ngOnDestroy(): void {
@@ -63,5 +64,9 @@ export class HomePageComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }
     })
+  }
+
+  handleAlertClose() {
+    this.errorOccurred = false;
   }
 }
