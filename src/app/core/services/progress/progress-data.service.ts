@@ -1,8 +1,9 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {EMPTY, Observable, of, switchMap} from "rxjs";
+import {BehaviorSubject, EMPTY, Observable, of, switchMap} from "rxjs";
 import {IProgress} from "../../models/progress/progress.model";
 import {UserService} from "../user/user.service";
+import {ITutorial} from "../../models/learning-path/tutorial.model";
 
 
 @Injectable({
@@ -13,6 +14,9 @@ export class ProgressDataService {
 
   private _httpClient: HttpClient = inject(HttpClient);
   private _userService: UserService = inject(UserService);
+
+  progressPercentageSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  progressPercentage$: Observable<number> = this.progressPercentageSubject.asObservable();
 
   constructor() { }
 

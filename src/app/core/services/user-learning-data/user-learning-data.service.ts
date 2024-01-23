@@ -1,9 +1,10 @@
 import {inject, Injectable} from '@angular/core';
 import {LearningPathService} from "../learning-path/learning-path.service";
 import {ProgressDataService} from "../progress/progress-data.service";
-import {combineLatest, map, Observable} from "rxjs";
+import {combineLatest, map, Observable, switchMap} from "rxjs";
 import {ILearningPath} from "../../models/learning-path/learning-path.model";
 import {IProgress} from "../../models/progress/progress.model";
+import {ITutorial} from "../../models/learning-path/tutorial.model";
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class UserLearningDataService {
     this._progressData$ = this._progressDataService.getUserProgress();
 
     this._initializeData();
+  }
+
+  set percentageProgress(progressPercentage: number) {
+    this._progressDataService.progressPercentageSubject.next(progressPercentage);
   }
 
   private _initializeData(): void {
@@ -45,8 +50,33 @@ export class UserLearningDataService {
           return module;
         });
 
+        this._publishPercentageProgress(totalTutorials, completedCount);
+
         return learningPath;
       })
     );
+  }
+
+  get lastCompletedTutorial$(): Observable<ITutorial | null> | undefined {
+    return this.userLearningData$?.pipe(
+      map(userLearningData=> {
+        return userLearningData.modules.flatMap(module => module.tutorials);
+      }),
+      map(allTutorials => allTutorials.filter(tutorial => tutorial.completed)),
+      map(completedTutorials => completedTutorials.sort((a, b) => {
+        if (a.id < b.id) {
+          return -1;
+        }
+        if (a.id > b.id) {
+          return 1;
+        }
+        return 0;
+      })),
+      map(sortedTutorials => sortedTutorials.length > 0 ? sortedTutorials[sortedTutorials.length - 1] : null)
+    );
+  }
+
+  private _publishPercentageProgress(totalTutorials: number, completedCount: number): void {
+    this.percentageProgress = (completedCount / totalTutorials) * 100;
   }
 }
