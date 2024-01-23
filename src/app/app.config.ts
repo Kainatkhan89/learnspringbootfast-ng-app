@@ -10,6 +10,7 @@ import {provideHttpClient} from "@angular/common/http";
 import {InMemoryWebApiModule} from "angular-in-memory-web-api";
 import {LearningPathData} from "./core/services/learning-path/learning-path.data";
 
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),

@@ -1,12 +1,13 @@
 import {InMemoryDbService} from "angular-in-memory-web-api";
 import {IModule} from "../../models/learning-path/module.model";
 import {ILearningPath} from "../../models/learning-path/learning-path.model";
+import {IProgress} from "../../models/progress/progress.model";
 
 export class LearningPathData implements InMemoryDbService {
   mockModule1: IModule = {
     id: 0,
     number: 1,
-    title: 'Spring Boot: The Concepts',
+    title: 'ASP .NET: The Concepts',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     styles: {
       color: 'INDIGO',
@@ -67,8 +68,8 @@ export class LearningPathData implements InMemoryDbService {
     },
     tutorials: [
       {
-        id: 0,
-        moduleId: 0,
+        id: 4,
+        moduleId: 1,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -77,8 +78,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 1,
-        moduleId: 0,
+        id: 5,
+        moduleId: 1,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -87,8 +88,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 2,
-        moduleId: 0,
+        id: 6,
+        moduleId: 1,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -97,8 +98,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 3,
-        moduleId: 0,
+        id: 7,
+        moduleId: 1,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -120,8 +121,8 @@ export class LearningPathData implements InMemoryDbService {
     },
     tutorials: [
       {
-        id: 0,
-        moduleId: 0,
+        id: 8,
+        moduleId: 2,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -130,8 +131,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 1,
-        moduleId: 0,
+        id: 9,
+        moduleId: 2,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -140,8 +141,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 2,
-        moduleId: 0,
+        id: 10,
+        moduleId: 2,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -150,8 +151,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 3,
-        moduleId: 0,
+        id: 11,
+        moduleId: 2,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -173,8 +174,8 @@ export class LearningPathData implements InMemoryDbService {
     },
     tutorials: [
       {
-        id: 0,
-        moduleId: 0,
+        id: 12,
+        moduleId: 3,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -183,8 +184,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 1,
-        moduleId: 0,
+        id: 13,
+        moduleId: 3,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -193,8 +194,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 2,
-        moduleId: 0,
+        id: 14,
+        moduleId: 3,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -203,8 +204,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 3,
-        moduleId: 0,
+        id: 15,
+        moduleId: 3,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -226,8 +227,8 @@ export class LearningPathData implements InMemoryDbService {
     },
     tutorials: [
       {
-        id: 0,
-        moduleId: 0,
+        id: 16,
+        moduleId: 4,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -236,8 +237,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 1,
-        moduleId: 0,
+        id: 17,
+        moduleId: 4,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -246,8 +247,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 2,
-        moduleId: 0,
+        id: 18,
+        moduleId: 4,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -256,8 +257,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 3,
-        moduleId: 0,
+        id: 19,
+        moduleId: 4,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -279,8 +280,8 @@ export class LearningPathData implements InMemoryDbService {
     },
     tutorials: [
       {
-        id: 0,
-        moduleId: 0,
+        id: 20,
+        moduleId: 5,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -289,8 +290,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 1,
-        moduleId: 0,
+        id: 21,
+        moduleId: 5,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -299,8 +300,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 2,
-        moduleId: 0,
+        id: 22,
+        moduleId: 5,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -309,8 +310,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 3,
-        moduleId: 0,
+        id: 23,
+        moduleId: 5,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -332,8 +333,8 @@ export class LearningPathData implements InMemoryDbService {
     },
     tutorials: [
       {
-        id: 0,
-        moduleId: 0,
+        id: 24,
+        moduleId: 6,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -342,8 +343,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 1,
-        moduleId: 0,
+        id: 25,
+        moduleId: 6,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -352,8 +353,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 2,
-        moduleId: 0,
+        id: 26,
+        moduleId: 6,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -362,8 +363,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 3,
-        moduleId: 0,
+        id: 27,
+        moduleId: 6,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -385,8 +386,8 @@ export class LearningPathData implements InMemoryDbService {
     },
     tutorials: [
       {
-        id: 0,
-        moduleId: 0,
+        id: 28,
+        moduleId: 7,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -395,8 +396,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 1,
-        moduleId: 0,
+        id: 29,
+        moduleId: 7,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -405,8 +406,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 2,
-        moduleId: 0,
+        id: 30,
+        moduleId: 7,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -415,8 +416,8 @@ export class LearningPathData implements InMemoryDbService {
         finishedFilesUrl: '',
       },
       {
-        id: 3,
-        moduleId: 0,
+        id: 31,
+        moduleId: 7,
         title: 'Lorem Ipsum Tutorial',
         durationSeconds: 90,
         completed: false,
@@ -430,7 +431,12 @@ export class LearningPathData implements InMemoryDbService {
   learningPath: ILearningPath = { modules: [this.mockModule1, this.mockModule2, this.mockModule3, this.mockModule4,
     this.mockModule5, this.mockModule6, this.mockModule7, this.mockModule8] }
 
+  progressData: IProgress = {
+    userId: 'SnfKNtkKYsPIds52hGh9aTtSEb92',
+    completedTutorialIds: [0, 1, 2, 3]
+  };
+
   createDb() {
-    return {learningPath: this.learningPath};
+    return {learningPath: this.learningPath, progress: this.progressData};
   }
 }
