@@ -5,7 +5,7 @@ import {ModuleIconComponent} from "../../../shared/icons/module-icon/module-icon
 import {DurationFormatPipe} from "../../../core/pipes/duration-format/duration-format.pipe";
 
 @Component({
-  selector: 'ldnf-home-page-module-card',
+  selector: 'lsbf-home-page-module-card',
   standalone: true,
   imports: [
     PillComponent,

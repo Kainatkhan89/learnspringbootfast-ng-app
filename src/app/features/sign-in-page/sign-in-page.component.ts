@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import {LogoComponent} from "../../shared/logo/logo.component";
-import {SignUpFormComponent} from "../sign-up-page/sign-up-form/sign-up-form.component";
 import {SignInFormComponent} from "./sign-in-form/sign-in-form.component";
 import {RouterLink} from "@angular/router";
 
 @Component({
-  selector: 'ldnf-sign-in-page',
+  selector: 'lsbf-sign-in-page',
   standalone: true,
     imports: [
         LogoComponent,

@@ -4,7 +4,7 @@ import {Auth, signOut} from "@angular/fire/auth";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'ldnf-home-page-header',
+  selector: 'lsbf-home-page-header',
   standalone: true,
     imports: [
         LogoComponent
@@ -16,7 +16,7 @@ export class HomePageHeaderComponent {
   private _auth: Auth = inject(Auth);
   private _router: Router = inject(Router);
 
-  signOut(): void {
+  handleSignOut(): void {
     signOut(this._auth).then(() => {
       this._router.navigate(['/']);
     });

@@ -1,21 +1,21 @@
-<ldnf-home-page-header></ldnf-home-page-header>
+<lsbf-home-page-header></lsbf-home-page-header>
 
 <main class="mx-auto max-w-7xl sm:px-6 lg:px-8 py-6 sm:py-10 mb-14">
-  <ldnf-alert-panel *ngIf="errorOccurred" type="ERROR" headingText="Error"
+  <lsbf-alert-panel *ngIf="errorOccurred" type="ERROR" headingText="Error"
                     message="An error occured while loading your learning path data."
                     (closeAlert)="handleAlertClose()"
-  ></ldnf-alert-panel>
+  ></lsbf-alert-panel>
 
-  <ldnf-loading-spinner *ngIf="isLoading" size="LARGE"></ldnf-loading-spinner>
+  <lsbf-loading-spinner *ngIf="isLoading" size="LARGE"></lsbf-loading-spinner>
 
   <div *ngIf="learningPath" class="space-y-16">
     <div>
-      <ldnf-home-page-progress-card [progressPercentage]="progressPercentage" [firstTutorial]="firstTutorial" [lastCompletedTutorial]="lastCompletedTutorial"></ldnf-home-page-progress-card>
+      <lsbf-home-page-progress-card [progressPercentage]="progressPercentage" [firstTutorial]="firstTutorial" [lastCompletedTutorial]="lastCompletedTutorial"></lsbf-home-page-progress-card>
     </div>
     <div>
-      <ldnf-home-page-learning-path [learningPathData] = "learningPath"></ldnf-home-page-learning-path>
+      <lsbf-home-page-learning-path [learningPathData] = "learningPath"></lsbf-home-page-learning-path>
     </div>
   </div>
 </main>
 
-<ldnf-home-page-footer></ldnf-home-page-footer>
+<lsbf-home-page-footer></lsbf-home-page-footer>

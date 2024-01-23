@@ -1,5 +1,5 @@
 <div *ngIf="errorMessage" class="mb-8">
-  <ldnf-alert-panel type="ERROR" headingText="Error" [message]="errorMessage" (closeAlert)="handleAlertClose()"></ldnf-alert-panel>
+  <lsbf-alert-panel type="ERROR" headingText="Error" [message]="errorMessage" (closeAlert)="handleAlertClose()"></lsbf-alert-panel>
 </div>
 
 <form class="space-y-6" [formGroup]="signInForm" (ngSubmit)="signIn()">

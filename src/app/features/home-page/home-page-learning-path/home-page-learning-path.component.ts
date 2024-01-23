@@ -4,7 +4,7 @@ import {HomePageModuleCardComponent} from "../home-page-module-card/home-page-mo
 import {NgForOf} from "@angular/common";
 
 @Component({
-  selector: 'ldnf-home-page-learning-path',
+  selector: 'lsbf-home-page-learning-path',
   standalone: true,
   imports: [
     HomePageModuleCardComponent,

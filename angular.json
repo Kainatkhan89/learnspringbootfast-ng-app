@@ -3,17 +3,17 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ldnf-ng-app": {
+    "lsbf-ng-app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
       "sourceRoot": "src",
-      "prefix": "ldnf",
+      "prefix": "lsbf",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/ldnf-ng-app",
+            "outputPath": "dist/lsbf-ng-app",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -57,10 +57,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ldnf-ng-app:build:production"
+              "buildTarget": "lsbf-ng-app:build:production"
             },
             "development": {
-              "buildTarget": "ldnf-ng-app:build:development"
+              "buildTarget": "lsbf-ng-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -68,7 +68,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "ldnf-ng-app:build"
+            "buildTarget": "lsbf-ng-app:build"
           }
         },
         "test": {
@@ -96,12 +96,12 @@
           },
           "configurations": {
             "production": {
-              "buildTarget": "ldnf-ng-app:build:production",
-              "serveTarget": "ldnf-ng-app:serve:production"
+              "buildTarget": "lsbf-ng-app:build:production",
+              "serveTarget": "lsbf-ng-app:serve:production"
             },
             "development": {
-              "buildTarget": "ldnf-ng-app:build:development",
-              "serveTarget": "ldnf-ng-app:serve:development"
+              "buildTarget": "lsbf-ng-app:build:development",
+              "serveTarget": "lsbf-ng-app:serve:development"
             }
           },
           "defaultConfiguration": "production"

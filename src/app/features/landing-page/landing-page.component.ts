@@ -4,7 +4,7 @@ import {LandingPageHeaderComponent} from "./landing-page-header/landing-page-hea
 import {LandingPageHeroComponent} from "./landing-page-hero/landing-page-hero.component";
 
 @Component({
-  selector: 'ldnf-landing-page',
+  selector: 'lsbf-landing-page',
   standalone: true,
   imports: [
     LogoComponent,

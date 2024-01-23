@@ -4,7 +4,7 @@ import {LogoComponent} from "../../shared/logo/logo.component";
 import {RouterLink} from "@angular/router";
 
 @Component({
-  selector: 'ldnf-forgot-password-page',
+  selector: 'lsbf-forgot-password-page',
   standalone: true,
   imports: [
     ForgotPasswordFormComponent,

@@ -4,7 +4,7 @@ import {LogoComponent} from "../../shared/logo/logo.component";
 import {RouterLink} from "@angular/router";
 
 @Component({
-  selector: 'ldnf-sign-up-page',
+  selector: 'lsbf-sign-up-page',
   standalone: true,
   imports: [
     SignUpFormComponent,

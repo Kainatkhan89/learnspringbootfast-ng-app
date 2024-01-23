@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {NoProgressWelcomeMessageComponent} from "../no-progress-welcome-message/no-progress-welcome-message.component";
 import {NgIf} from "@angular/common";
@@ -6,12 +6,10 @@ import {
   ResumeProgressWelcomeMessageComponent
 } from "../resume-progress-welcome-message/resume-progress-welcome-message.component";
 import {ITutorial} from "../../../core/models/learning-path/tutorial.model";
-import {ProgressDataService} from "../../../core/services/progress/progress-data.service";
-import {Observable, of, Subscription} from "rxjs";
 import {PercentageFormatPipe} from "../../../core/pipes/percentage-format/percentage-format.pipe";
 
 @Component({
-  selector: 'ldnf-home-page-progress-card',
+  selector: 'lsbf-home-page-progress-card',
   standalone: true,
   imports: [
     RouterLink,

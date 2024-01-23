@@ -5,10 +5,9 @@ import {NgClass, NgIf} from "@angular/common";
 import {Router} from "@angular/router";
 import {debounceTime, Subscription} from "rxjs";
 import {AlertPanelComponent} from "../../../shared/alert-panel/alert-panel.component";
-import {equalTo} from "@angular/fire/database";
 
 @Component({
-  selector: 'ldnf-sign-up-form',
+  selector: 'lsbf-sign-up-form',
   standalone: true,
   imports: [
     ReactiveFormsModule,

@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable, of, shareReplay, tap} from "rxjs";
+import {Observable} from "rxjs";
 import {ILearningPath} from "../../models/learning-path/learning-path.model";
 
 @Injectable({

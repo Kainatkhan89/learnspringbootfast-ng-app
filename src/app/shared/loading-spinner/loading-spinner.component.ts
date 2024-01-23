@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {NgClass} from "@angular/common";
 
 @Component({
-  selector: 'ldnf-loading-spinner',
+  selector: 'lsbf-loading-spinner',
   standalone: true,
   imports: [
     NgClass

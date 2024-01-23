@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {NgClass, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
 
 @Component({
-  selector: 'ldnf-module-icon',
+  selector: 'lsbf-module-icon',
   standalone: true,
   imports: [
     NgClass,

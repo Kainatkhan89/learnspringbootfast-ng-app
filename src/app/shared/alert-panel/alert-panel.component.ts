@@ -3,7 +3,7 @@ import {NgClass, NgIf} from "@angular/common";
 import {AlertIconComponent} from "./alert-icon/alert-icon.component";
 
 @Component({
-  selector: 'ldnf-alert-panel',
+  selector: 'lsbf-alert-panel',
   standalone: true,
   imports: [
     NgIf,

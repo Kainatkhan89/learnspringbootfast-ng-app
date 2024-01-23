@@ -7,7 +7,7 @@ import {debounceTime, Subscription} from "rxjs";
 import {AlertPanelComponent} from "../../../shared/alert-panel/alert-panel.component";
 
 @Component({
-  selector: 'ldnf-sign-in-form',
+  selector: 'lsbf-sign-in-form',
   standalone: true,
   imports: [
     NgIf,

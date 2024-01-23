@@ -5,7 +5,7 @@ import {ITutorial} from "../../../core/models/learning-path/tutorial.model";
 import {NgIf} from "@angular/common";
 
 @Component({
-  selector: 'ldnf-resume-progress-welcome-message',
+  selector: 'lsbf-resume-progress-welcome-message',
   standalone: true,
   imports: [
     WavingHandComponent,

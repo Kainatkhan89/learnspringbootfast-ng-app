@@ -1,9 +1,9 @@
 <div class="overflow-hidden sm:rounded-lg bg-gray-900">
   <div class="flex flex-wrap items-center justify-between px-4 py-12 sm:p-6 gap-y-10">
     <div class="w-full sm:w-1/2">
-     <ldnf-no-progress-welcome-message [firstTutorial]="firstTutorial" *ngIf="progressPercentage == 0; else resumeProgressMessageComponent"></ldnf-no-progress-welcome-message>
+     <lsbf-no-progress-welcome-message [firstTutorial]="firstTutorial" *ngIf="progressPercentage == 0; else resumeProgressMessageComponent"></lsbf-no-progress-welcome-message>
       <ng-template #resumeProgressMessageComponent>
-        <ldnf-resume-progress-welcome-message [lastCompletedTutorial]="lastCompletedTutorial"></ldnf-resume-progress-welcome-message>
+        <lsbf-resume-progress-welcome-message [lastCompletedTutorial]="lastCompletedTutorial"></lsbf-resume-progress-welcome-message>
       </ng-template>
     </div>
     <div class="w-full sm:w-1/2 flex items-center justify-center">

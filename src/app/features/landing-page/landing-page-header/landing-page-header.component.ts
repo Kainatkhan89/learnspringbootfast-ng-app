@@ -3,7 +3,7 @@ import {LogoComponent} from "../../../shared/logo/logo.component";
 import {RouterLink} from "@angular/router";
 
 @Component({
-  selector: 'ldnf-landing-page-header',
+  selector: 'lsbf-landing-page-header',
   standalone: true,
   imports: [
     LogoComponent,

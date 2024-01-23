@@ -3,7 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, EMPTY, Observable, of, switchMap} from "rxjs";
 import {IProgress} from "../../models/progress/progress.model";
 import {UserService} from "../user/user.service";
-import {ITutorial} from "../../models/learning-path/tutorial.model";
 
 
 @Injectable({
