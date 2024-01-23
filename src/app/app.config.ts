@@ -2,13 +2,11 @@ import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getAuth, provideAuth } from '@angular/fire/auth';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { getStorage, provideStorage } from '@angular/fire/storage';
 import {provideHttpClient} from "@angular/common/http";
 import {InMemoryWebApiModule} from "angular-in-memory-web-api";
 import {LearningPathData} from "./core/services/learning-path/learning-path.data";
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 
 
 export const appConfig: ApplicationConfig = {
@@ -16,8 +14,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     importProvidersFrom(InMemoryWebApiModule.forRoot(LearningPathData, { delay: 1000 })),
-    importProvidersFrom(provideFirebaseApp(() => initializeApp({"projectId":"learndotnetfast","appId":"1:523066733452:web:5eab92ebb18500a1695ca9","storageBucket":"learndotnetfast.appspot.com","apiKey":"AIzaSyCPOxlp3Xt5eUuMDDgmE0cG3y4-ZpfPhmc","authDomain":"learndotnetfast.firebaseapp.com","messagingSenderId":"523066733452"}))),
-    importProvidersFrom(provideAuth(() => getAuth())),
-    importProvidersFrom(provideFirestore(() => getFirestore())),
-    importProvidersFrom(provideStorage(() => getStorage()))]
+    importProvidersFrom(provideFirebaseApp(() => initializeApp({"projectId":"learnspringbootfast","appId":"1:369723666075:web:3e82892c2077fbfa2f203e","storageBucket":"learnspringbootfast.appspot.com","apiKey":"AIzaSyBRFSwhMaj1tqi9W7zv5z8_uroqkSdp95A","authDomain":"learnspringbootfast.firebaseapp.com","messagingSenderId":"369723666075"}))),
+    importProvidersFrom(provideAuth(() => getAuth())),]
 };
