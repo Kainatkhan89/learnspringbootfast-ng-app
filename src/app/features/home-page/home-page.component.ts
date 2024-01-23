@@ -38,23 +38,26 @@ export class HomePageComponent implements OnInit, OnDestroy {
   private _progressDataService: ProgressDataService = inject(ProgressDataService);
 
   private _userLearningDataSubscription: Subscription | undefined;
-
-  progressPercentage$: Observable<number> = of(0);
-  lastCompletedTutorial$: Observable<ITutorial | null> | undefined;
+  private _progressPercentageSubscription: Subscription | undefined;
+  private _lastCompletedTutorialSubscription: Subscription | undefined;
 
   learningPath: ILearningPath | undefined;
+  progressPercentage: number | undefined;
+  lastCompletedTutorial: ITutorial | undefined | null;
+
   isLoading: boolean = true;
   errorOccurred: boolean = false;
 
-
   ngOnInit(): void {
     this._userLearningDataSubscription = this._subscribeToUserLearningData();
-    this.progressPercentage$ = this._progressDataService.progressPercentage$;
-    this._userLearningDataService.lastCompletedTutorial$?.subscribe((tutorial) => console.log(tutorial));
+    this._progressPercentageSubscription = this._subscribeToProgressPercentage();
+    this._lastCompletedTutorialSubscription = this._subscribeToLastCompletedTutorial();
   }
 
   ngOnDestroy(): void {
     this._userLearningDataSubscription?.unsubscribe();
+    this._progressPercentageSubscription?.unsubscribe();
+    this._lastCompletedTutorialSubscription?.unsubscribe();
   }
 
   private _subscribeToUserLearningData(): Subscription | undefined {
@@ -68,6 +71,14 @@ export class HomePageComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }
     })
+  }
+
+  private _subscribeToProgressPercentage(): Subscription | undefined {
+    return this._progressDataService.progressPercentage$.subscribe((value) => this.progressPercentage = value);
+  }
+
+  private _subscribeToLastCompletedTutorial(): Subscription | undefined {
+    return this._userLearningDataService.lastCompletedTutorial$?.subscribe(tutorial => this.lastCompletedTutorial = tutorial);
   }
 
   handleAlertClose() {
