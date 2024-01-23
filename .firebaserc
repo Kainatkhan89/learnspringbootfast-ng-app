@@ -1,14 +1,14 @@
 {
   "targets": {
-    "learndotnetfast": {
+    "learnspringbootfast": {
       "hosting": {
-        "ldnf-ng-app": [
-          "learndotnetfast"
+        "lsbf-ng-app": [
+          "learnspringbootfast"
         ]
       }
     }
   },
   "projects": {
-    "default": "learndotnetfast"
+    "default": "learnspringbootfast"
   }
 }
