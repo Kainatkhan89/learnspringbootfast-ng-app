@@ -12,6 +12,7 @@ import {HomePageLearningPathComponent} from "./home-page-learning-path/home-page
 import {AlertPanelComponent} from "../../shared/alert-panel/alert-panel.component";
 import {UserService} from "../../core/services/user/user.service";
 import {ProgressDataService} from "../../core/services/progress/progress-data.service";
+import {UserLearningDataService} from "../../core/services/user-learning-data/user-learning-data.service";
 
 @Component({
   selector: 'ldnf-home-page',
@@ -31,18 +32,16 @@ import {ProgressDataService} from "../../core/services/progress/progress-data.se
   styleUrl: './home-page.component.css'
 })
 export class HomePageComponent implements OnInit, OnDestroy {
-  private _learningPathService: LearningPathService = inject(LearningPathService);
-  private _progressDataService: ProgressDataService = inject(ProgressDataService);
-  private _learningPathSubscription: Subscription | undefined;
-  private _userProgressSubscription: Subscription | undefined;
+  private _userLearningDataService: UserLearningDataService = inject(UserLearningDataService);
+
+  private _userLearningDataSubscription: Subscription | undefined;
 
   learningPath: ILearningPath | undefined;
   isLoading: boolean = true;
   errorOccurred: boolean = false;
 
   ngOnInit(): void {
-    this._learningPathSubscription = this._setupLearningPathSubscription();
-    this._userProgressSubscription = this._setupUserProgressSubscription();
+    this._userLearningDataSubscription = this._subscribeToUserLearningData();
   }
 
   handleAlertClose() {
@@ -50,12 +49,11 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._learningPathSubscription?.unsubscribe();
-    this._userProgressSubscription?.unsubscribe();
+    this._userLearningDataSubscription?.unsubscribe();
   }
 
-  private _setupLearningPathSubscription(): Subscription {
-    return this._learningPathService.getLearningPath().subscribe({
+  private _subscribeToUserLearningData(): Subscription | undefined {
+    return this._userLearningDataService.userLearningData$?.subscribe({
       next: (data) => {
         this.learningPath = data
         this.isLoading = false;
@@ -64,14 +62,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
         this.errorOccurred = true;
         this.isLoading = false;
       }
-    });
-  }
-
-  private _setupUserProgressSubscription(): Subscription {
-    return this._progressDataService.getUserProgress().subscribe({
-      next: (data) => {
-        console.log(data);
-      }
-    });
+    })
   }
 }
