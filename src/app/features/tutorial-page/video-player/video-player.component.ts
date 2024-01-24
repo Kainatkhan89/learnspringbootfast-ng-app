@@ -6,6 +6,7 @@ import {ITutorial} from "../../../core/models/learning-path/tutorial.model";
 import {NgIf} from "@angular/common";
 import {AlertPanelComponent} from "../../../shared/alert-panel/alert-panel.component";
 import {LoadingSpinnerComponent} from "../../../shared/loading-spinner/loading-spinner.component";
+import {VideoPlayerService} from "../../../core/services/video-player/video-player.service";
 
 @Component({
   selector: 'lsbf-video-player',
@@ -22,6 +23,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   @ViewChild("videoElementRef") videoElementRef: ElementRef<HTMLVideoElement> | undefined;
 
   private _tutorialService: TutorialService = inject(TutorialService);
+  private _videoPlayerService: VideoPlayerService = inject(VideoPlayerService);
   private _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private _router: Router = inject(Router);
 
