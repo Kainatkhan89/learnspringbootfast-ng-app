@@ -19,11 +19,11 @@ export class ProgressDataService {
 
   constructor() { }
 
-  getUserProgress(): Observable<IProgress> {
+  getUserProgress$(): Observable<IProgress> {
     return this._userService.user$.pipe(
       switchMap(user => {
         if (user && user.uid) {
-          return this._fetchUserProgressData(user.uid);
+          return this._fetchUserProgressData$(user.uid);
         } else {
           return EMPTY;
         }
@@ -31,7 +31,7 @@ export class ProgressDataService {
     );
   }
 
-  private _fetchUserProgressData(userId: string): Observable<IProgress> {
+  private _fetchUserProgressData$(userId: string): Observable<IProgress> {
     return this._httpClient.get<IProgress>(this._progressDataApi);
   }
 }

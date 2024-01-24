@@ -20,7 +20,7 @@ export class UserLearningDataService {
 
   constructor() {
     this._learningPath$ = this._learningPathService.getLearningPath$();
-    this._progressData$ = this._progressDataService.getUserProgress();
+    this._progressData$ = this._progressDataService.getUserProgress$();
 
     this._initializeData();
   }
