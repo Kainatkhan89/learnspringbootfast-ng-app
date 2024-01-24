@@ -4,7 +4,7 @@ import {Subscription} from "rxjs";
 import {ITutorial} from "../../core/models/learning-path/tutorial.model";
 import {LoadingSpinnerComponent} from "../../shared/loading-spinner/loading-spinner.component";
 import {NgForOf, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
-import {ActivatedRoute, RouterLink} from "@angular/router";
+import {ActivatedRoute, RouterLink, RouterOutlet} from "@angular/router";
 import {VideoPlayerComponent} from "./video-player/video-player.component";
 import {UserLearningDataService} from "../../core/services/user-learning-data/user-learning-data.service";
 import {ILearningPath} from "../../core/models/learning-path/learning-path.model";
@@ -20,7 +20,8 @@ import {user} from "@angular/fire/auth";
     VideoPlayerComponent,
     NgIf,
     NgForOf,
-    RouterLink
+    RouterLink,
+    RouterOutlet
   ],
   templateUrl: './tutorial-page.component.html',
   styleUrl: './tutorial-page.component.css'

@@ -1,13 +1,13 @@
 <div class="bg-black w-screen h-screen flex flex-row">
   <div class="w-9/12 h-full flex items-center">
-    <lsbf-video-player></lsbf-video-player>
+    <router-outlet></router-outlet>
   </div>
   <div class="flex-1 h-full overflow-y-auto bg-gray-900 text-slate-200 p-4">
     <ul *ngIf="userLearningData" class="space-y-6">
       <ul *ngFor="let module of userLearningData.modules" class="space-y-4">
         <span>Module: {{ module.title }}</span>
         <li *ngFor="let tutorial of module.tutorials">
-          <a routerLink="#">{{ tutorial.title }}</a>
+          <a [routerLink]="['/tutorial', tutorial.id]">{{ tutorial.title }}</a>
         </li>
       </ul>
     </ul>
