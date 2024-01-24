@@ -16,4 +16,10 @@ import {NgForOf, NgIf} from "@angular/common";
 })
 export class TutorialPlaylistComponent {
   @Input() userLearningData: ILearningPath | undefined;
+
+  showPlaylist: boolean = true;
+
+  closePlaylist(): void {
+    this.showPlaylist = false;
+  }
 }
