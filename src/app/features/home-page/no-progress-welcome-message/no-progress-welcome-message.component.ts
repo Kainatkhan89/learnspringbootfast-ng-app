@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {RouterLink} from "@angular/router";
+import {Component, inject, Input} from '@angular/core';
+import {Router, RouterLink} from "@angular/router";
 import {WavingHandComponent} from "../../../shared/icons/waving-hand/waving-hand.component";
 import {ITutorial} from "../../../core/models/learning-path/tutorial.model";
 import {NgIf} from "@angular/common";
@@ -17,4 +17,12 @@ import {NgIf} from "@angular/common";
 })
 export class NoProgressWelcomeMessageComponent {
   @Input() firstTutorial: ITutorial | undefined;
+
+  private _router: Router = inject(Router);
+
+  navigateToFirstTutorial(): void {
+    if (this.firstTutorial) {
+      this._router.navigate(['/tutorial', this.firstTutorial.id]);
+    }
+  }
 }

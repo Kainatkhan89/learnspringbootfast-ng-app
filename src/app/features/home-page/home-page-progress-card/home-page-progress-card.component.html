@@ -3,7 +3,7 @@
     <div class="w-full sm:w-1/2">
      <lsbf-no-progress-welcome-message [firstTutorial]="firstTutorial" *ngIf="progressPercentage == 0; else resumeProgressMessageComponent"></lsbf-no-progress-welcome-message>
       <ng-template #resumeProgressMessageComponent>
-        <lsbf-resume-progress-welcome-message [lastCompletedTutorial]="lastCompletedTutorial"></lsbf-resume-progress-welcome-message>
+        <lsbf-resume-progress-welcome-message [lastCompletedTutorial]="lastCompletedTutorial" [progressPercentage]="progressPercentage"></lsbf-resume-progress-welcome-message>
       </ng-template>
     </div>
     <div class="w-full sm:w-1/2 flex items-center justify-center">
