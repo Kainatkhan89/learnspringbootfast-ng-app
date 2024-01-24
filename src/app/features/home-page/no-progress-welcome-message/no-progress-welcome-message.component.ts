@@ -22,7 +22,7 @@ export class NoProgressWelcomeMessageComponent {
 
   navigateToFirstTutorial(): void {
     if (this.firstTutorial) {
-      this._router.navigate(['/tutorial']);
+      this._router.navigate(['/tutorial', this.firstTutorial.id]);
     }
   }
 }
