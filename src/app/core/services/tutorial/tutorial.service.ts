@@ -19,9 +19,8 @@ export class TutorialService {
     this.currentTutorialSubject.next(tutorial);
   }
 
-  getTutorialById(tutorialId: number): Observable<ITutorial | null> {
-    return this._getAllLearningPathTutorials().pipe(
-      tap(() => console.log(tutorialId)),
+  getTutorialById$(tutorialId: number): Observable<ITutorial | null> {
+    return this._getAllLearningPathTutorials$().pipe(
       map(tutorials => tutorials.find(tutorial => tutorial.id === tutorialId) || null),
       catchError(error => {
         console.error('Error fetching tutorial:', error);
@@ -30,8 +29,8 @@ export class TutorialService {
     );
   }
 
-  getNextTutorial(currentTutorialId: number): Observable<ITutorial | null> {
-    return this._getAllLearningPathTutorials().pipe(
+  getNextTutorial$(currentTutorialId: number): Observable<ITutorial | null> {
+    return this._getAllLearningPathTutorials$().pipe(
       map(tutorials => {
         const currentIndex = tutorials.findIndex(tutorial => tutorial.id === currentTutorialId);
         if (currentIndex === -1 || currentIndex >= tutorials.length - 1) {
@@ -42,14 +41,14 @@ export class TutorialService {
     );
   }
 
-  isFirstTutorial(currentTutorialId: number): Observable<boolean> {
-    return this._getAllLearningPathTutorials().pipe(
+  isFirstTutorial$(currentTutorialId: number): Observable<boolean> {
+    return this._getAllLearningPathTutorials$().pipe(
       map(tutorials => tutorials.findIndex(tutorial => tutorial.id === currentTutorialId) === 0)
     );
   }
 
-  isLastTutorial(currentTutorialId: number): Observable<boolean> {
-    return this._getAllLearningPathTutorials().pipe(
+  isLastTutorial$(currentTutorialId: number): Observable<boolean> {
+    return this._getAllLearningPathTutorials$().pipe(
       map(tutorials => {
         const index = tutorials.findIndex(tutorial => tutorial.id === currentTutorialId);
         return index !== -1 && index === tutorials.length - 1;
@@ -57,8 +56,8 @@ export class TutorialService {
     );
   }
 
-  private _getAllLearningPathTutorials(): Observable<ITutorial[]> {
-    return this._learningPathService.getLearningPath().pipe(
+  private _getAllLearningPathTutorials$(): Observable<ITutorial[]> {
+    return this._learningPathService.getLearningPath$().pipe(
       map((learningPath => {
         return learningPath.modules.flatMap(module => module.tutorials);
       }))

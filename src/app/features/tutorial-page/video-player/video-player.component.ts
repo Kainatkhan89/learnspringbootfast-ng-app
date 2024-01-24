@@ -45,8 +45,10 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
       this._getTutorialSubscription?.unsubscribe();
 
       if (tutorialIdStr) {
-        this._getTutorialSubscription = this._tutorialService.getTutorialById(+tutorialIdStr).subscribe(tutorial => {
-          if (tutorial) this.currentTutorial = tutorial;
+        this._getTutorialSubscription = this._tutorialService.getTutorialById$(+tutorialIdStr).subscribe(tutorial => {
+          if (tutorial) {
+            this.currentTutorial = tutorial
+          }
         });
       }
     });

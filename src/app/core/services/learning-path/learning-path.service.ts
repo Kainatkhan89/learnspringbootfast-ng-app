@@ -13,7 +13,7 @@ export class LearningPathService {
 
   constructor() { }
 
-  getLearningPath(): Observable<ILearningPath> {
+  getLearningPath$(): Observable<ILearningPath> {
     return this._httpClient.get<ILearningPath>(this._learningPathApi);
   }
 }
