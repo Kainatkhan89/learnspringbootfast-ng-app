@@ -1,15 +1,19 @@
 import {Component, ElementRef, inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {of, Subscription, switchMap, tap} from "rxjs";
 import {TutorialService} from "../../../core/services/tutorial/tutorial.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ITutorial} from "../../../core/models/learning-path/tutorial.model";
 import {NgIf} from "@angular/common";
+import {AlertPanelComponent} from "../../../shared/alert-panel/alert-panel.component";
+import {LoadingSpinnerComponent} from "../../../shared/loading-spinner/loading-spinner.component";
 
 @Component({
   selector: 'lsbf-video-player',
   standalone: true,
   imports: [
-    NgIf
+    NgIf,
+    AlertPanelComponent,
+    LoadingSpinnerComponent
   ],
   templateUrl: './video-player.component.html',
   styleUrl: './video-player.component.css'
@@ -19,11 +23,14 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
 
   private _tutorialService: TutorialService = inject(TutorialService);
   private _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+  private _router: Router = inject(Router);
 
   private _activatedRouteSubscription: Subscription | undefined;
   private _getTutorialSubscription: Subscription | undefined;
 
   currentTutorial: ITutorial | undefined;
+  isLoading: boolean = true;
+  errorOccurred: boolean = false;
 
   ngOnInit(): void {
     this._subscribeToGetTutorialBasedOnActivatedRouteParam$();
@@ -46,12 +53,21 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
       this._getTutorialSubscription?.unsubscribe();
 
       if (tutorialId != null) {
-        this._getTutorialSubscription = this._tutorialService.getTutorialById$(tutorialId).subscribe(tutorial => {
-          if (tutorial) {
-            this.currentTutorial = tutorial
+        this._getTutorialSubscription = this._tutorialService.getTutorialById$(tutorialId).subscribe(value => {
+          this.isLoading = false;
+
+          if (value) {
+            this.currentTutorial = value;
+          } else {
+            this.errorOccurred = true;
           }
         });
       }
     });
+  }
+
+  handleAlertClose() {
+    this.errorOccurred = false;
+    this._router.navigate(['/home']);
   }
 }

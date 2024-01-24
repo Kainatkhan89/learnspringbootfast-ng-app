@@ -1,2 +1,10 @@
-<p class="text-slate-200">video-player works!</p>
-<p *ngIf="currentTutorial" class="text-slate-200">{{ currentTutorial.id + ' ' + currentTutorial.title }}</p>
+<lsbf-loading-spinner *ngIf="isLoading" size="LARGE" ></lsbf-loading-spinner>
+
+<div *ngIf="currentTutorial">
+  <p class="text-slate-200">video-player works!</p>
+  <p  class="text-slate-200">{{ currentTutorial.id + ' ' + currentTutorial.title }}</p>
+</div>
+
+
+<lsbf-alert-panel *ngIf="errorOccurred" type="ERROR" headingText="Error" message="There was an error loading the tutorial." (closeAlert)="handleAlertClose()"></lsbf-alert-panel>
+
