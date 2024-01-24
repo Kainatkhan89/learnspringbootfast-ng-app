@@ -26,4 +26,19 @@ export class TutorialService {
       }))
     );
   }
+
+  isFirstTutorial(currentTutorialId: number): Observable<boolean> {
+    return this.getAllLearningPathTutorials().pipe(
+      map(tutorials => tutorials.findIndex(tutorial => tutorial.id === currentTutorialId) === 0)
+    );
+  }
+
+  isLastTutorial(currentTutorialId: number): Observable<boolean> {
+    return this.getAllLearningPathTutorials().pipe(
+      map(tutorials => {
+        const index = tutorials.findIndex(tutorial => tutorial.id === currentTutorialId);
+        return index !== -1 && index === tutorials.length - 1;
+      })
+    );
+  }
 }
