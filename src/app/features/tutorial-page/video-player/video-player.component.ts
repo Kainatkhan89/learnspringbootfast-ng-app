@@ -26,7 +26,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   currentTutorial: ITutorial | undefined;
 
   ngOnInit(): void {
-    this._subscribeToActivatedRouteAndTutorialService$();
+    this._subscribeToGetTutorialBasedOnActivatedRouteParam$();
   }
 
   ngOnDestroy(): void {
@@ -38,7 +38,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
     return this.videoElementRef?.nativeElement;
   }
 
-  private _subscribeToActivatedRouteAndTutorialService$(): void {
+  private _subscribeToGetTutorialBasedOnActivatedRouteParam$(): void {
     this._activatedRouteSubscription = this._activatedRoute.paramMap.subscribe(params => {
       const tutorialIdStr: string | null = params.get('tutorialId');
 
