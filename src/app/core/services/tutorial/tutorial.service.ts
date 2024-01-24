@@ -16,7 +16,6 @@ export class TutorialService {
   constructor() { }
 
   setCurrentTutorial(tutorial: ITutorial): void {
-    console.log(tutorial);
     this.currentTutorialSubject.next(tutorial);
   }
 
