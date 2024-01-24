@@ -51,9 +51,9 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._userLearningDataSubscription = this._subscribeToUserLearningData();
-    this._progressPercentageSubscription = this._subscribeToProgressPercentage();
-    this._lastCompletedTutorialSubscription = this._subscribeToLastCompletedTutorial();
+    this._userLearningDataSubscription = this._subscribeToUserLearningData$();
+    this._progressPercentageSubscription = this._subscribeToProgressPercentage$();
+    this._lastCompletedTutorialSubscription = this._subscribeToLastCompletedTutorial$();
   }
 
   ngOnDestroy(): void {
@@ -62,7 +62,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this._lastCompletedTutorialSubscription?.unsubscribe();
   }
 
-  private _subscribeToUserLearningData(): Subscription | undefined {
+  private _subscribeToUserLearningData$(): Subscription | undefined {
     return this._userLearningDataService.userLearningData$?.subscribe({
       next: (data) => {
         this.learningPath = data
@@ -75,11 +75,11 @@ export class HomePageComponent implements OnInit, OnDestroy {
     })
   }
 
-  private _subscribeToProgressPercentage(): Subscription | undefined {
+  private _subscribeToProgressPercentage$(): Subscription | undefined {
     return this._progressDataService.progressPercentage$.subscribe((value) => this.progressPercentage = value);
   }
 
-  private _subscribeToLastCompletedTutorial(): Subscription | undefined {
+  private _subscribeToLastCompletedTutorial$(): Subscription | undefined {
     return this._userLearningDataService.lastCompletedTutorial$?.subscribe(tutorial => this.lastCompletedTutorial = tutorial);
   }
 
