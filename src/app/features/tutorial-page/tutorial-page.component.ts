@@ -26,8 +26,6 @@ import {user} from "@angular/fire/auth";
   styleUrl: './tutorial-page.component.css'
 })
 export class TutorialPageComponent implements OnInit, OnDestroy {
-  @ViewChild("videoElementRef") videoElementRef: ElementRef<HTMLVideoElement> | undefined;
-
   private _userLearningDataService: UserLearningDataService = inject(UserLearningDataService);
   private _tutorialService: TutorialService = inject(TutorialService);
   private _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
@@ -42,18 +40,14 @@ export class TutorialPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._subscribeToUserLearningData$();
-    this._subscribeToCurrentTutorial$();
-    this._subscribeToActivatedRoute$();
+    // this._subscribeToCurrentTutorial$();
+    // this._subscribeToActivatedRoute$();
   }
 
   ngOnDestroy(): void {
-    this._userLearningDataSubscription?.unsubscribe();
-    this._currentTutorialSubscription?.unsubscribe();
-    this._activatedRouteSubscription?.unsubscribe();
-  }
-
-  get videoElement(): HTMLVideoElement | undefined {
-    return this.videoElementRef?.nativeElement;
+    // this._userLearningDataSubscription?.unsubscribe();
+    // this._currentTutorialSubscription?.unsubscribe();
+    // this._activatedRouteSubscription?.unsubscribe();
   }
 
   private _subscribeToUserLearningData$(): void {
@@ -62,19 +56,17 @@ export class TutorialPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  private _subscribeToActivatedRoute$(): void {
-    this._activatedRouteSubscription = this._activatedRoute.params.subscribe(params => {
-      console.log(params['tutorialId']);
-    });
-  }
+  // private _subscribeToActivatedRoute$(): void {
+  //   this._activatedRouteSubscription = this._activatedRoute.params.subscribe(params => {
+  //     console.log(params['tutorialId']);
+  //   });
+  // }
 
-  private _subscribeToCurrentTutorial$(): void {
-    this._currentTutorialSubscription = this._tutorialService.currentTutorial$.subscribe(value => {
-      if (value) {
-        this.currentTutorial = value;
-      }
-    });
-  }
-
-  protected readonly user = user;
+  // private _subscribeToCurrentTutorial$(): void {
+  //   this._currentTutorialSubscription = this._tutorialService.currentTutorial$.subscribe(value => {
+  //     if (value) {
+  //       this.currentTutorial = value;
+  //     }
+  //   });
+  // }
 }
