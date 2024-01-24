@@ -41,11 +41,12 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   private _subscribeToGetTutorialBasedOnActivatedRouteParam$(): void {
     this._activatedRouteSubscription = this._activatedRoute.paramMap.subscribe(params => {
       const tutorialIdStr: string | null = params.get('tutorialId');
+      const tutorialId: number | null = tutorialIdStr ? parseInt(tutorialIdStr, 10) : null;
 
       this._getTutorialSubscription?.unsubscribe();
 
-      if (tutorialIdStr) {
-        this._getTutorialSubscription = this._tutorialService.getTutorialById$(+tutorialIdStr).subscribe(tutorial => {
+      if (tutorialId != null) {
+        this._getTutorialSubscription = this._tutorialService.getTutorialById$(tutorialId).subscribe(tutorial => {
           if (tutorial) {
             this.currentTutorial = tutorial
           }
