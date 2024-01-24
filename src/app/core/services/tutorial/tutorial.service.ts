@@ -27,6 +27,18 @@ export class TutorialService {
     );
   }
 
+  getNextTutorial(currentTutorialId: number): Observable<ITutorial | null> {
+    return this.getAllLearningPathTutorials().pipe(
+      map(tutorials => {
+        const currentIndex = tutorials.findIndex(tutorial => tutorial.id === currentTutorialId);
+        if (currentIndex === -1 || currentIndex >= tutorials.length - 1) {
+          return null;
+        }
+        return tutorials[currentIndex + 1];
+      })
+    );
+  }
+
   isFirstTutorial(currentTutorialId: number): Observable<boolean> {
     return this.getAllLearningPathTutorials().pipe(
       map(tutorials => tutorials.findIndex(tutorial => tutorial.id === currentTutorialId) === 0)
