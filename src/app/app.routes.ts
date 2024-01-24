@@ -6,7 +6,7 @@ import {VideoPlayerComponent} from "./features/tutorial-page/video-player/video-
 export const routes: Routes = [
   { path: '', loadComponent: () => import('./features/landing-page/landing-page.component').then(mod => mod.LandingPageComponent), canActivate: [signedOutGuard] },
   { path: 'home', loadComponent: () => import('./features/home-page/home-page.component').then(mod => mod.HomePageComponent), canActivate: [signedInGuard] },
-  { path: 'tutorial',
+  { path: 'tutorials',
     loadComponent: () => import('./features/tutorial-page/tutorial-page.component').then(mod => mod.TutorialPageComponent),
     children: [
       {

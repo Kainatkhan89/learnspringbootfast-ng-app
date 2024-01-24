@@ -34,7 +34,7 @@ export class ResumeProgressWelcomeMessageComponent implements OnDestroy {
     if (this.lastCompletedTutorial) {
       this._nextTutorialSubscription = this._tutorialService.getNextTutorial(this.lastCompletedTutorial.id).subscribe(nextTutorial => {
         if (nextTutorial) {
-          this._router.navigate(['/tutorial', nextTutorial.id]);
+          this._router.navigate(['/tutorials', nextTutorial.id]);
         }
       });
     }
