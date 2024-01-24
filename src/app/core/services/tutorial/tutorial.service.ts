@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {LearningPathService} from "../learning-path/learning-path.service";
-import {map, Observable, Subject} from "rxjs";
+import {BehaviorSubject, map, Observable, Subject} from "rxjs";
 import {ITutorial} from "../../models/learning-path/tutorial.model";
 
 
@@ -10,12 +10,13 @@ import {ITutorial} from "../../models/learning-path/tutorial.model";
 export class TutorialService {
   private _learningPathService: LearningPathService = inject(LearningPathService);
 
-  currentTutorialSubject: Subject<ITutorial> = new Subject<ITutorial>();
-  currentTutorial$: Observable<ITutorial> | undefined;
+  currentTutorialSubject: Subject<ITutorial | null> = new BehaviorSubject<ITutorial | null>(null);
+  currentTutorial$: Observable<ITutorial | null> = this.currentTutorialSubject.asObservable();
 
   constructor() { }
 
   setCurrentTutorial(tutorial: ITutorial): void {
+    console.log(tutorial);
     this.currentTutorialSubject.next(tutorial);
   }
 
