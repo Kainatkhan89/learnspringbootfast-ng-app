@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {LearningPathService} from "../learning-path/learning-path.service";
-import {BehaviorSubject, catchError, map, Observable, of, Subject} from "rxjs";
+import {BehaviorSubject, catchError, map, Observable, of, Subject, tap} from "rxjs";
 import {ITutorial} from "../../models/learning-path/tutorial.model";
 
 
@@ -21,6 +21,7 @@ export class TutorialService {
 
   getTutorialById(tutorialId: number): Observable<ITutorial | null> {
     return this._getAllLearningPathTutorials().pipe(
+      tap(() => console.log(tutorialId)),
       map(tutorials => tutorials.find(tutorial => tutorial.id === tutorialId) || null),
       catchError(error => {
         console.error('Error fetching tutorial:', error);
