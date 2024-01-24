@@ -28,27 +28,16 @@ import {user} from "@angular/fire/auth";
 })
 export class TutorialPageComponent implements OnInit, OnDestroy {
   private _userLearningDataService: UserLearningDataService = inject(UserLearningDataService);
-  private _tutorialService: TutorialService = inject(TutorialService);
-  private _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
-
   private _userLearningDataSubscription: Subscription | undefined;
-  private _currentTutorialSubscription: Subscription | undefined;
-  private _activatedRouteSubscription: Subscription | undefined;
 
   userLearningData: ILearningPath | undefined;
 
-  currentTutorial: ITutorial | undefined;
-
   ngOnInit(): void {
     this._subscribeToUserLearningData$();
-    // this._subscribeToCurrentTutorial$();
-    // this._subscribeToActivatedRoute$();
   }
 
   ngOnDestroy(): void {
-    // this._userLearningDataSubscription?.unsubscribe();
-    // this._currentTutorialSubscription?.unsubscribe();
-    // this._activatedRouteSubscription?.unsubscribe();
+     this._userLearningDataSubscription?.unsubscribe();
   }
 
   private _subscribeToUserLearningData$(): void {
@@ -56,18 +45,4 @@ export class TutorialPageComponent implements OnInit, OnDestroy {
       this.userLearningData = value;
     });
   }
-
-  // private _subscribeToActivatedRoute$(): void {
-  //   this._activatedRouteSubscription = this._activatedRoute.params.subscribe(params => {
-  //     console.log(params['tutorialId']);
-  //   });
-  // }
-
-  // private _subscribeToCurrentTutorial$(): void {
-  //   this._currentTutorialSubscription = this._tutorialService.currentTutorial$.subscribe(value => {
-  //     if (value) {
-  //       this.currentTutorial = value;
-  //     }
-  //   });
-  // }
 }

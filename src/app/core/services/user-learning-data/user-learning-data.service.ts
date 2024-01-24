@@ -19,8 +19,8 @@ export class UserLearningDataService {
   userLearningData$: Observable<ILearningPath> | undefined;
 
   constructor() {
-    this._learningPath$ = this._learningPathService.getLearningPath();
-    this._progressData$ = this._progressDataService.getUserProgress();
+    this._learningPath$ = this._learningPathService.getLearningPath$();
+    this._progressData$ = this._progressDataService.getUserProgress$();
 
     this._initializeData();
   }
