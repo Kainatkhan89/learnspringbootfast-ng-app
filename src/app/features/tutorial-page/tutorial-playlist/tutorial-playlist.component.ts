@@ -1,8 +1,10 @@
-import {Component, Input} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {ILearningPath} from "../../../core/models/learning-path/learning-path.model";
 import {RouterLink} from "@angular/router";
-import {NgForOf, NgIf} from "@angular/common";
+import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {animate, style, transition, trigger} from "@angular/animations";
+import {VideoPlayerService} from "../../../core/services/video-player/video-player.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'lsbf-tutorial-playlist',
@@ -11,6 +13,7 @@ import {animate, style, transition, trigger} from "@angular/animations";
     RouterLink,
     NgForOf,
     NgIf,
+    AsyncPipe,
 
   ],
   templateUrl: './tutorial-playlist.component.html',
@@ -41,9 +44,11 @@ import {animate, style, transition, trigger} from "@angular/animations";
 export class TutorialPlaylistComponent {
   @Input() userLearningData: ILearningPath | undefined;
 
-  showPlaylist: boolean = true;
+  private _videoPlayerService: VideoPlayerService = inject(VideoPlayerService);
+
+  showPlaylist$: Observable<boolean> = this._videoPlayerService.showTutorialsPlaylist$;
 
   closePlaylist(): void {
-    this.showPlaylist = false;
+    this._videoPlayerService.closeTutorialsPlaylist();
   }
 }

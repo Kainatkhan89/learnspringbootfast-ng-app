@@ -68,6 +68,10 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
     });
   }
 
+  showTutorialPlaylist(): void {
+    this._videoPlayerService.showTutorialsPlaylist();
+  }
+
   handleAlertClose() {
     this.errorOccurred = false;
     this._router.navigate(['/home']);
