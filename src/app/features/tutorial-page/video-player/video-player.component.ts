@@ -1,5 +1,5 @@
 import {Component, ElementRef, inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {of, Subscription, switchMap, tap} from "rxjs";
+import {Subscription} from "rxjs";
 import {TutorialService} from "../../../core/services/tutorial/tutorial.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ITutorial} from "../../../core/models/learning-path/tutorial.model";
