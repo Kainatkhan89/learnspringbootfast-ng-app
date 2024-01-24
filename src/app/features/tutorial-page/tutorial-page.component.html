@@ -7,7 +7,7 @@
       <ul *ngFor="let module of userLearningData.modules" class="space-y-4">
         <span>Module: {{ module.title }}</span>
         <li *ngFor="let tutorial of module.tutorials">
-          <a [routerLink]="['/tutorial', tutorial.id]">{{ tutorial.title }}</a>
+          <a [routerLink]="['/tutorials', tutorial.id]">{{ tutorial.title }}</a>
         </li>
       </ul>
     </ul>
