@@ -27,7 +27,6 @@ export class TutorialPageComponent implements OnInit, OnDestroy {
   private _activatedRouteSubscription: Subscription | undefined;
 
   currentTutorial: ITutorial | undefined;
-  showPlayer: boolean = false;
 
   ngOnInit(): void {
     this._subscribeToCurrentTutorial$();
@@ -53,7 +52,6 @@ export class TutorialPageComponent implements OnInit, OnDestroy {
     this._currentTutorialSubscription = this._tutorialService.currentTutorial$.subscribe(value => {
       if (value) {
         this.currentTutorial = value;
-        this.showPlayer = true;
       }
     });
   }
