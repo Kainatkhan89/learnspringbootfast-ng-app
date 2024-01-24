@@ -9,6 +9,7 @@ import {VideoPlayerComponent} from "./video-player/video-player.component";
 import {UserLearningDataService} from "../../core/services/user-learning-data/user-learning-data.service";
 import {ILearningPath} from "../../core/models/learning-path/learning-path.model";
 import {user} from "@angular/fire/auth";
+import {TutorialPlaylistComponent} from "./tutorial-playlist/tutorial-playlist.component";
 
 @Component({
   selector: 'lsbf-tutorial-page',
@@ -21,7 +22,8 @@ import {user} from "@angular/fire/auth";
     NgIf,
     NgForOf,
     RouterLink,
-    RouterOutlet
+    RouterOutlet,
+    TutorialPlaylistComponent
   ],
   templateUrl: './tutorial-page.component.html',
   styleUrl: './tutorial-page.component.css'
