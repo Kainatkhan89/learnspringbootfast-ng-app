@@ -1,0 +1,54 @@
+progress[value] {
+  appearance: none;
+  border: none;
+  background-color: #4f46e5;
+}
+
+.video-playback-progress-bar::-webkit-progress-value {
+  background-color: #4f46e5;
+}
+
+.video-playback-progress-bar::-moz-progress-bar {
+  background-color: #4f46e5;
+}
+
+.learning-path-progress-bar::-webkit-progress-value {
+  background-color: #22c55e;
+}
+
+.learning-path-progress-bar::-moz-progress-bar {
+  background-color: #22c55e;
+}
+
+.volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-runnable-track {
+  height: 0.5rem;
+}
+
+.volume-slider::-moz-range-track {
+  height: 0.5rem;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  margin-top: -2px;
+  border-radius: 50%;
+  height: 0.75rem;
+  width: 0.75rem;
+  background-color: #e2e8f0;
+}
+
+.volume-slider::-moz-range-thumb {
+  -moz-appearance: none;
+  margin-top: -2px;
+  border-radius: 50%;
+  height: 0.75rem;
+  width: 0.75rem;
+  background-color: #e2e8f0;
+}
