@@ -8,6 +8,8 @@ import {AlertPanelComponent} from "../../../shared/alert-panel/alert-panel.compo
 import {LoadingSpinnerComponent} from "../../../shared/loading-spinner/loading-spinner.component";
 import {VideoPlayerService} from "../../../core/services/video-player/video-player.service";
 import {ProgressDataService} from "../../../core/services/progress/progress-data.service";
+import {FormControl} from "@angular/forms";
+import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'lsbf-video-player',
@@ -18,7 +20,19 @@ import {ProgressDataService} from "../../../core/services/progress/progress-data
     LoadingSpinnerComponent
   ],
   templateUrl: './video-player.component.html',
-  styleUrl: './video-player.component.css'
+  styleUrl: './video-player.component.css',
+  animations: [
+    trigger("playerControlsAnimation", [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms ease-out', style({  opacity: 1 }))
+      ]),
+      transition(':leave', [
+        style({ opacity: 1, transform: 'scale(1)' }),
+        animate('200ms ease-in', style({ opacity: 0 }))
+      ])
+    ]),
+  ]
 })
 export class VideoPlayerComponent implements OnInit, OnDestroy {
   @ViewChild("videoElementRef") videoElementRef: ElementRef<HTMLVideoElement> | undefined;
@@ -41,19 +55,22 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   errorOccurred: boolean = false;
 
   showPlayerControls: boolean = true;
-  // isPlaying: boolean = false;
   showPlaybackRateMenu: boolean = false;
   videoProgressPercentage: number = 0;
+
+  volumeSliderControl: FormControl = new FormControl(75);
 
   private _volumeLevel: number = 75;
 
   ngOnInit(): void {
     this._subscribeToGetTutorialBasedOnActivatedRouteParam$();
+    this._subscribeToVolumeSliderValueChange();
   }
 
   ngOnDestroy(): void {
     this._activatedRouteSubscription?.unsubscribe();
     this._getTutorialSubscription?.unsubscribe();
+    this._volumeSliderSubscription?.unsubscribe();
   }
 
   get videoElement(): HTMLVideoElement | undefined {
@@ -110,13 +127,34 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
     if (this.isPlaying) this._setupTimerToHideControls();
   }
 
+  handlePlaybackRateSelection(selectedValue: number): void {
+    this.playbackRate = selectedValue;
+    this.showPlaybackRateMenu = false;
+  }
+
+  togglePlaybackRateMenu(): void {
+    this.showPlaybackRateMenu = !this.showPlaybackRateMenu;
+  }
+
+  updateVideoProgressOnCurrentTimeUpdate(): void {
+    this.videoProgressPercentage = (this.currentPlaybackTime / this.videoDuration) * 100;
+  }
+
+  handleVideoProgressBarClick(event: MouseEvent): void {
+    this._seekVideoOnClickEventLocation(event);
+  }
+
+  handleVideoEnd(): void {
+    console.log('video ended, can navigate to next tutorial');
+  }
+
+  goFullscreen(): void {
+    if (this.videoElement) this.videoElement.requestFullscreen();
+  }
+
   handleAlertClose() {
     this.errorOccurred = false;
     this._router.navigate(['/home']);
-  }
-
-  private _convertRangeInputToVolumeLevel(inputValue: number): number {
-    return inputValue / 100;
   }
 
   private _subscribeToGetTutorialBasedOnActivatedRouteParam$(): void {
@@ -138,6 +176,16 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
+
+  private _subscribeToVolumeSliderValueChange(): void {
+    this._volumeSliderSubscription = this.volumeSliderControl.valueChanges.subscribe((value) => {
+      this.volumeLevel = value;
+    });
+  }
+
+  private _convertRangeInputToVolumeLevel(inputValue: number): number {
+    return inputValue / 100;
   }
 
   private _togglePlayback(): void {
@@ -169,5 +217,9 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
 
   private _showMouseCursor(): void {
     document.body.style.cursor = "default";
+  }
+
+  private _seekVideoOnClickEventLocation(event: MouseEvent): void {
+    if (this.videoElement) this.currentPlaybackTime = ((event.clientX - this.videoElement.getBoundingClientRect().left) / this.videoElement.offsetWidth) * this.videoDuration;
   }
 }
