@@ -1,15 +1,16 @@
 import {Component, ElementRef, inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Observable, Subscription} from "rxjs";
 import {TutorialService} from "../../../core/services/tutorial/tutorial.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {ITutorial} from "../../../core/models/learning-path/tutorial.model";
-import {NgIf} from "@angular/common";
+import {AsyncPipe, NgClass, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
 import {AlertPanelComponent} from "../../../shared/alert-panel/alert-panel.component";
 import {LoadingSpinnerComponent} from "../../../shared/loading-spinner/loading-spinner.component";
 import {VideoPlayerService} from "../../../core/services/video-player/video-player.service";
 import {ProgressDataService} from "../../../core/services/progress/progress-data.service";
-import {FormControl} from "@angular/forms";
+import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {animate, style, transition, trigger} from "@angular/animations";
+import {PercentageFormatPipe} from "../../../core/pipes/percentage-format/percentage-format.pipe";
 
 @Component({
   selector: 'lsbf-video-player',
@@ -17,7 +18,14 @@ import {animate, style, transition, trigger} from "@angular/animations";
   imports: [
     NgIf,
     AlertPanelComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    AsyncPipe,
+    PercentageFormatPipe,
+    RouterLink,
+    ReactiveFormsModule,
+    NgClass,
+    NgSwitch,
+    NgSwitchCase
   ],
   templateUrl: './video-player.component.html',
   styleUrl: './video-player.component.css',
@@ -46,9 +54,8 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   private _activatedRouteSubscription: Subscription | undefined;
   private _getTutorialSubscription: Subscription | undefined;
   private _volumeSliderSubscription: Subscription | undefined;
+  private _learningPathProgressSubscription: Subscription | undefined;
   private _hidePlayerControlsTimerId: number = 0;
-
-  learningPathProgress$: Observable<number> = this._progressDataService.progressPercentage$;
 
   currentTutorial: ITutorial | undefined;
   isLoading: boolean = true;
@@ -59,18 +66,21 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   videoProgressPercentage: number = 0;
 
   volumeSliderControl: FormControl = new FormControl(75);
+  learningPathProgress: number = 0;
 
   private _volumeLevel: number = 75;
 
   ngOnInit(): void {
     this._subscribeToGetTutorialBasedOnActivatedRouteParam$();
     this._subscribeToVolumeSliderValueChange();
+    this._subscribeToLearningPathProgress();
   }
 
   ngOnDestroy(): void {
     this._activatedRouteSubscription?.unsubscribe();
     this._getTutorialSubscription?.unsubscribe();
     this._volumeSliderSubscription?.unsubscribe();
+    this._learningPathProgressSubscription?.unsubscribe();
   }
 
   get videoElement(): HTMLVideoElement | undefined {
@@ -90,7 +100,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   }
 
   get playbackRate(): number {
-    return this.videoElement ? this.videoElement.playbackRate : 0;
+    return this.videoElement ? this.videoElement.playbackRate : 1;
   }
 
   set playbackRate(rate: number) {
@@ -112,6 +122,14 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
     return this.videoElement ? !this.videoElement.paused : false;
   }
 
+  get isFirstVideo(): boolean {
+    return false;
+  }
+
+  get isLastVideo(): boolean {
+    return false;
+  }
+
   handlePlaybackToggle(): void {
     this._togglePlayback();
     this._toggleControlsDisplay();
@@ -127,8 +145,8 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
     if (this.isPlaying) this._setupTimerToHideControls();
   }
 
-  handlePlaybackRateSelection(selectedValue: number): void {
-    this.playbackRate = selectedValue;
+  setPlaybackRate(rate: number): void {
+    this.playbackRate = rate;
     this.showPlaybackRateMenu = false;
   }
 
@@ -184,6 +202,12 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
     });
   }
 
+  private _subscribeToLearningPathProgress(): void {
+    this._learningPathProgressSubscription = this._progressDataService.progressPercentage$.subscribe(value => {
+      this.learningPathProgress = value;
+    })
+  }
+
   private _convertRangeInputToVolumeLevel(inputValue: number): number {
     return inputValue / 100;
   }
@@ -202,7 +226,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
     this._cancelExistingHideControlsTimer();
 
     this._hidePlayerControlsTimerId = setTimeout(() => {
-      this.showPlayerControls = true;
+      this.showPlayerControls = false;
       this._hideMouseCursor();
     }, 4000);
   }
