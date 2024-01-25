@@ -163,7 +163,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   }
 
   handleVideoEnd(): void {
-    console.log('video ended, can navigate to next tutorial');
+    console.log('video ended, can navigate to next tutorial and mark current tutorial as done');
   }
 
   goFullscreen(): void {
