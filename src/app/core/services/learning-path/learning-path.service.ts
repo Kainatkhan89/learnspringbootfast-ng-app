@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {map, Observable, of, tap} from "rxjs";
 import {ILearningPath} from "../../models/learning-path/learning-path.model";
 
 @Injectable({
@@ -10,10 +10,26 @@ export class LearningPathService {
   private readonly _learningPathApi: string = '/api/learningPath';
 
   private _httpClient: HttpClient = inject(HttpClient);
+  private _cachedLearningPathData: ILearningPath | undefined;
 
   constructor() { }
 
   getLearningPath$(): Observable<ILearningPath> {
-    return this._httpClient.get<ILearningPath>(this._learningPathApi);
+    if (this._cachedLearningPathData) {
+      return of(this._cachedLearningPathData);
+    } else {
+      return this._fetchLearningPath$();
+    }
   }
+
+  private _fetchLearningPath$(): Observable<ILearningPath> {
+    return this._httpClient.get<ILearningPath>(this._learningPathApi).pipe(
+      tap(value => {
+        if (!this._cachedLearningPathData) {
+          this._cachedLearningPathData = value;
+        }
+      }),
+    );
+  }
+
 }
