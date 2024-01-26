@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import {signedInGuard} from "./core/guards/signed-in.guard";
 import {signedOutGuard} from "./core/guards/signed-out.guard";
 import {VideoPlayerComponent} from "./features/tutorial-page/video-player/video-player.component";
-import {TutorialResolverService} from "./core/services/tutorial/tutorial-resolver.service";
 
 export const routes: Routes = [
   { path: '', loadComponent: () => import('./features/landing-page/landing-page.component').then(mod => mod.LandingPageComponent), canActivate: [signedOutGuard] },
@@ -13,9 +12,6 @@ export const routes: Routes = [
       {
         path: ':tutorialId',
         component: VideoPlayerComponent,
-        resolve: {
-          tutorial: TutorialResolverService
-        }
       }
     ],
     canActivate: [signedInGuard] },
