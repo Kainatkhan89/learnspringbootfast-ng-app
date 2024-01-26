@@ -1,4 +1,4 @@
-import {Component, ElementRef, inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, inject, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Observable, of, Subscription} from "rxjs";
 import {TutorialService} from "../../../core/services/tutorial/tutorial.service";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
@@ -43,21 +43,19 @@ import {PercentageFormatPipe} from "../../../core/pipes/percentage-format/percen
   ]
 })
 export class VideoPlayerComponent implements OnInit, OnDestroy {
+  @Input() currentTutorial: ITutorial | undefined;
+
   @ViewChild("videoElementRef") videoElementRef: ElementRef<HTMLVideoElement> | undefined;
 
-  // private _tutorialService: TutorialService = inject(TutorialService);
   private _videoPlayerService: VideoPlayerService = inject(VideoPlayerService);
   private _progressDataService: ProgressDataService = inject(ProgressDataService);
-  private _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private _router: Router = inject(Router);
 
-  private _activatedRouteSubscription: Subscription | undefined;
   private _getTutorialSubscription: Subscription | undefined;
   private _volumeSliderSubscription: Subscription | undefined;
   private _learningPathProgressSubscription: Subscription | undefined;
   private _hidePlayerControlsTimerId: number = 0;
 
-  currentTutorial: ITutorial | undefined;
   errorOccurred: boolean = false;
 
   showPlayerControls: boolean = true;
@@ -70,13 +68,11 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   private _volumeLevel: number = 75;
 
   ngOnInit(): void {
-    this._subscribeToGetTutorialFromActivatedRouteData$();
     this._subscribeToVolumeSliderValueChange();
     this._subscribeToLearningPathProgress();
   }
 
   ngOnDestroy(): void {
-    this._activatedRouteSubscription?.unsubscribe();
     this._getTutorialSubscription?.unsubscribe();
     this._volumeSliderSubscription?.unsubscribe();
     this._learningPathProgressSubscription?.unsubscribe();
@@ -167,41 +163,6 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
 
   goFullscreen(): void {
     if (this.videoElement) this.videoElement.requestFullscreen();
-  }
-
-  handleAlertClose() {
-    this.errorOccurred = false;
-    this._router.navigate(['/home']);
-  }
-
-  private _subscribeToGetTutorialFromActivatedRouteData$(): void {
-    this._activatedRouteSubscription = this._activatedRoute.data.subscribe(({ tutorial }) => {
-      if (tutorial) {
-        this.currentTutorial = tutorial;
-      } else {
-        this.errorOccurred = true;
-      }
-    })
-
-
-    // this._activatedRouteSubscription = this._activatedRoute.paramMap.subscribe(params => {
-    //   const tutorialIdStr: string | null = params.get('tutorialId');
-    //   const tutorialId: number | null = tutorialIdStr ? parseInt(tutorialIdStr, 10) : null;
-    //
-    //   this._getTutorialSubscription?.unsubscribe();
-    //
-    //   if (tutorialId != null) {
-    //     this._getTutorialSubscription = this._tutorialService.getTutorialById$(tutorialId).subscribe(value => {
-    //       this.isLoading = false;
-    //
-    //       if (value) {
-    //         this.currentTutorial = value;
-    //       } else {
-    //         this.errorOccurred = true;
-    //       }
-    //     });
-    //   }
-    // });
   }
 
   private _subscribeToVolumeSliderValueChange(): void {
