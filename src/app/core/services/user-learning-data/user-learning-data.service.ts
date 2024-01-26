@@ -25,10 +25,6 @@ export class UserLearningDataService {
     this._initializeData();
   }
 
-  set percentageProgress(progressPercentage: number) {
-    this._progressDataService.progressPercentageSubject.next(progressPercentage);
-  }
-
   private _initializeData(): void {
     this.userLearningData$ = combineLatest([this._learningPath$, this._progressData$]).pipe(
       map(([learningPath , progressData]) => {
@@ -77,6 +73,7 @@ export class UserLearningDataService {
   }
 
   private _publishPercentageProgress(totalTutorials: number, completedCount: number): void {
-    this.percentageProgress = (completedCount / totalTutorials) * 100;
+    const percentageProgress: number = (completedCount / totalTutorials) * 100;
+    this._progressDataService.progressPercentageSubject.next(percentageProgress);
   }
 }
