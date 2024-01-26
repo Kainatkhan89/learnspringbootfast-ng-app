@@ -58,7 +58,6 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   private _hidePlayerControlsTimerId: number = 0;
 
   currentTutorial: ITutorial | undefined;
-  isLoading: boolean = true;
   errorOccurred: boolean = false;
 
   showPlayerControls: boolean = true;
@@ -71,7 +70,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   private _volumeLevel: number = 75;
 
   ngOnInit(): void {
-    this._subscribeToGetTutorialFromActivatededRouteData$();
+    this._subscribeToGetTutorialFromActivatedRouteData$();
     this._subscribeToVolumeSliderValueChange();
     this._subscribeToLearningPathProgress();
   }
@@ -175,7 +174,16 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
     this._router.navigate(['/home']);
   }
 
-  private _subscribeToGetTutorialFromActivatededRouteData$(): void {
+  private _subscribeToGetTutorialFromActivatedRouteData$(): void {
+    this._activatedRouteSubscription = this._activatedRoute.data.subscribe(({ tutorial }) => {
+      if (tutorial) {
+        this.currentTutorial = tutorial;
+      } else {
+        this.errorOccurred = true;
+      }
+    })
+
+
     // this._activatedRouteSubscription = this._activatedRoute.paramMap.subscribe(params => {
     //   const tutorialIdStr: string | null = params.get('tutorialId');
     //   const tutorialId: number | null = tutorialIdStr ? parseInt(tutorialIdStr, 10) : null;
