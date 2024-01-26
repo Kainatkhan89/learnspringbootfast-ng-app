@@ -10,8 +10,8 @@ import {HomePageFooterComponent} from "./home-page-footer/home-page-footer.compo
 import {HomePageLearningPathComponent} from "./home-page-learning-path/home-page-learning-path.component";
 import {AlertPanelComponent} from "../../shared/alert-panel/alert-panel.component";
 import {ProgressDataService} from "../../core/services/progress/progress-data.service";
-import {UserLearningDataService} from "../../core/services/user-learning-data/user-learning-data.service";
 import {ITutorial} from "../../core/models/learning-path/tutorial.model";
+import {LearningPathService} from "../../core/services/learning-path/learning-path.service";
 
 @Component({
   selector: 'lsbf-home-page',
@@ -32,10 +32,11 @@ import {ITutorial} from "../../core/models/learning-path/tutorial.model";
   styleUrl: './home-page.component.css'
 })
 export class HomePageComponent implements OnInit, OnDestroy {
-  private _userLearningDataService: UserLearningDataService = inject(UserLearningDataService);
+  // private _userLearningDataService: UserLearningDataService = inject(UserLearningDataService);
+  private _learningPathDataService: LearningPathService = inject(LearningPathService);
   private _progressDataService: ProgressDataService = inject(ProgressDataService);
 
-  private _userLearningDataSubscription: Subscription | undefined;
+  private _learningPathSubscription: Subscription | undefined;
   private _progressPercentageSubscription: Subscription | undefined;
   private _lastCompletedTutorialSubscription: Subscription | undefined;
 
@@ -51,19 +52,19 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._userLearningDataSubscription = this._subscribeToUserLearningData$();
+    this._learningPathSubscription = this._subscribeToUserLearningData$();
     this._progressPercentageSubscription = this._subscribeToProgressPercentage$();
-    this._lastCompletedTutorialSubscription = this._subscribeToLastCompletedTutorial$();
+    // this._lastCompletedTutorialSubscription = this._subscribeToLastCompletedTutorial$();
   }
 
   ngOnDestroy(): void {
-    this._userLearningDataSubscription?.unsubscribe();
+    this._learningPathSubscription?.unsubscribe();
     this._progressPercentageSubscription?.unsubscribe();
     this._lastCompletedTutorialSubscription?.unsubscribe();
   }
 
   private _subscribeToUserLearningData$(): Subscription | undefined {
-    return this._userLearningDataService.userLearningData$?.subscribe({
+    return this._learningPathDataService.getLearningPath$()?.subscribe({
       next: (data) => {
         this.learningPath = data
         this.isLoading = false;
@@ -79,9 +80,9 @@ export class HomePageComponent implements OnInit, OnDestroy {
     return this._progressDataService.progressPercentage$.subscribe((value) => this.progressPercentage = value);
   }
 
-  private _subscribeToLastCompletedTutorial$(): Subscription | undefined {
-    return this._userLearningDataService.lastCompletedTutorial$?.subscribe(tutorial => this.lastCompletedTutorial = tutorial);
-  }
+  // private _subscribeToLastCompletedTutorial$(): Subscription | undefined {
+  //   return this._userLearningDataService.lastCompletedTutorial$?.subscribe(tutorial => this.lastCompletedTutorial = tutorial);
+  // }
 
   handleAlertClose() {
     this.errorOccurred = false;
