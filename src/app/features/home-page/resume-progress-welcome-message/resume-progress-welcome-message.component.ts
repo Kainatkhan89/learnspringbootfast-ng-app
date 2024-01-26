@@ -4,7 +4,7 @@ import {Router, RouterLink} from "@angular/router";
 import {ITutorial} from "../../../core/models/learning-path/tutorial.model";
 import {NgIf} from "@angular/common";
 import {TutorialService} from "../../../core/services/tutorial/tutorial.service";
-import {Subscription} from "rxjs";
+import {last, Subscription} from "rxjs";
 
 @Component({
   selector: 'lsbf-resume-progress-welcome-message',
@@ -43,4 +43,6 @@ export class ResumeProgressWelcomeMessageComponent implements OnDestroy {
   showResetProgressModal(): void {
     // TODO: Implement reset progress modal
   }
+
+    protected readonly last = last;
 }
