@@ -1,5 +1,5 @@
 import {Component, ElementRef, inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Observable, Subscription} from "rxjs";
+import {Observable, of, Subscription} from "rxjs";
 import {TutorialService} from "../../../core/services/tutorial/tutorial.service";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {ITutorial} from "../../../core/models/learning-path/tutorial.model";
@@ -45,7 +45,7 @@ import {PercentageFormatPipe} from "../../../core/pipes/percentage-format/percen
 export class VideoPlayerComponent implements OnInit, OnDestroy {
   @ViewChild("videoElementRef") videoElementRef: ElementRef<HTMLVideoElement> | undefined;
 
-  private _tutorialService: TutorialService = inject(TutorialService);
+  // private _tutorialService: TutorialService = inject(TutorialService);
   private _videoPlayerService: VideoPlayerService = inject(VideoPlayerService);
   private _progressDataService: ProgressDataService = inject(ProgressDataService);
   private _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
@@ -71,7 +71,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   private _volumeLevel: number = 75;
 
   ngOnInit(): void {
-    this._subscribeToGetTutorialBasedOnActivatedRouteParam$();
+    this._subscribeToGetTutorialFromActivatededRouteData$();
     this._subscribeToVolumeSliderValueChange();
     this._subscribeToLearningPathProgress();
   }
@@ -122,11 +122,11 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
     return this.videoElement ? !this.videoElement.paused : false;
   }
 
-  get isFirstVideo(): boolean {
+  get isFirstTutorial(): boolean {
     return false;
   }
 
-  get isLastVideo(): boolean {
+  get isLastTutorial(): boolean {
     return false;
   }
 
@@ -175,25 +175,25 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
     this._router.navigate(['/home']);
   }
 
-  private _subscribeToGetTutorialBasedOnActivatedRouteParam$(): void {
-    this._activatedRouteSubscription = this._activatedRoute.paramMap.subscribe(params => {
-      const tutorialIdStr: string | null = params.get('tutorialId');
-      const tutorialId: number | null = tutorialIdStr ? parseInt(tutorialIdStr, 10) : null;
-
-      this._getTutorialSubscription?.unsubscribe();
-
-      if (tutorialId != null) {
-        this._getTutorialSubscription = this._tutorialService.getTutorialById$(tutorialId).subscribe(value => {
-          this.isLoading = false;
-
-          if (value) {
-            this.currentTutorial = value;
-          } else {
-            this.errorOccurred = true;
-          }
-        });
-      }
-    });
+  private _subscribeToGetTutorialFromActivatededRouteData$(): void {
+    // this._activatedRouteSubscription = this._activatedRoute.paramMap.subscribe(params => {
+    //   const tutorialIdStr: string | null = params.get('tutorialId');
+    //   const tutorialId: number | null = tutorialIdStr ? parseInt(tutorialIdStr, 10) : null;
+    //
+    //   this._getTutorialSubscription?.unsubscribe();
+    //
+    //   if (tutorialId != null) {
+    //     this._getTutorialSubscription = this._tutorialService.getTutorialById$(tutorialId).subscribe(value => {
+    //       this.isLoading = false;
+    //
+    //       if (value) {
+    //         this.currentTutorial = value;
+    //       } else {
+    //         this.errorOccurred = true;
+    //       }
+    //     });
+    //   }
+    // });
   }
 
   private _subscribeToVolumeSliderValueChange(): void {
