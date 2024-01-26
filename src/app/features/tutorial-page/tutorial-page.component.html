@@ -1,2 +1,9 @@
-<router-outlet></router-outlet>
-<lsbf-tutorial-playlist [userLearningData]="userLearningData"></lsbf-tutorial-playlist>
+<div *ngIf="errorOccurred" class="flex h-screen w-screen items-center justify-center">
+  <lsbf-alert-panel type="ERROR" headingText="Error" message="There was an error loading the tutorial." (closeAlert)="handleAlertClose()"></lsbf-alert-panel>
+</div>
+
+<ng-container *ngIf="currentTutorial">
+  <lsbf-video-player [currentTutorial]="currentTutorial"></lsbf-video-player>
+  <lsbf-tutorial-playlist [userLearningData]="userLearningData"></lsbf-tutorial-playlist>
+</ng-container>
+
