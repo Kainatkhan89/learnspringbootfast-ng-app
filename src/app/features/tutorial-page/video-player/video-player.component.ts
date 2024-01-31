@@ -1,7 +1,6 @@
 import {Component, ElementRef, inject, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Observable, of, Subscription} from "rxjs";
-import {TutorialService} from "../../../core/services/tutorial/tutorial.service";
-import {ActivatedRoute, Router, RouterLink} from "@angular/router";
+import {Subscription} from "rxjs";
+import {RouterLink} from "@angular/router";
 import {ITutorial} from "../../../core/models/learning-path/tutorial.model";
 import {AsyncPipe, NgClass, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
 import {AlertPanelComponent} from "../../../shared/alert-panel/alert-panel.component";
@@ -48,8 +47,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   @ViewChild("videoElementRef") videoElementRef: ElementRef<HTMLVideoElement> | undefined;
 
   private _videoPlayerService: VideoPlayerService = inject(VideoPlayerService);
-  private _progressDataService: LearningProgressService = inject(LearningProgressService);
-  private _router: Router = inject(Router);
+  private _learningProgressService: LearningProgressService = inject(LearningProgressService);
 
   private _getTutorialSubscription: Subscription | undefined;
   private _volumeSliderSubscription: Subscription | undefined;
@@ -172,7 +170,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   }
 
   private _subscribeToLearningPathProgress(): void {
-    this._learningPathProgressSubscription = this._progressDataService.progressPercentage$.subscribe(value => {
+    this._learningPathProgressSubscription = this._learningProgressService.progressPercentage$.subscribe(value => {
       this.learningPathProgress = value;
     })
   }

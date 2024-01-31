@@ -33,7 +33,7 @@ import {LearningPathService} from "../../core/services/learning-path/learning-pa
 })
 export class HomePageComponent implements OnInit, OnDestroy {
   private _learningPathDataService: LearningPathService = inject(LearningPathService);
-  private _progressDataService: LearningProgressService = inject(LearningProgressService);
+  private _learningProgressService: LearningProgressService = inject(LearningProgressService);
 
   private _learningPathSubscription: Subscription | undefined;
   private _progressPercentageSubscription: Subscription | undefined;
@@ -76,7 +76,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   private _subscribeToProgressPercentage$(): Subscription | undefined {
-    return this._progressDataService.progressPercentage$.subscribe((value) => this.progressPercentage = value);
+    return this._learningProgressService.progressPercentage$.subscribe((value) => this.progressPercentage = value);
   }
 
   // private _subscribeToLastCompletedTutorial$(): Subscription | undefined {
