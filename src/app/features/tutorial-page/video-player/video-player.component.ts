@@ -7,7 +7,7 @@ import {AsyncPipe, NgClass, NgIf, NgSwitch, NgSwitchCase} from "@angular/common"
 import {AlertPanelComponent} from "../../../shared/alert-panel/alert-panel.component";
 import {LoadingSpinnerComponent} from "../../../shared/loading-spinner/loading-spinner.component";
 import {VideoPlayerService} from "../../../core/services/video-player/video-player.service";
-import {ProgressDataService} from "../../../core/services/progress/progress-data.service";
+import {LearningProgressService} from "../../../core/services/progress/learning-progress.service";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {PercentageFormatPipe} from "../../../core/pipes/percentage-format/percentage-format.pipe";
@@ -48,7 +48,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   @ViewChild("videoElementRef") videoElementRef: ElementRef<HTMLVideoElement> | undefined;
 
   private _videoPlayerService: VideoPlayerService = inject(VideoPlayerService);
-  private _progressDataService: ProgressDataService = inject(ProgressDataService);
+  private _progressDataService: LearningProgressService = inject(LearningProgressService);
   private _router: Router = inject(Router);
 
   private _getTutorialSubscription: Subscription | undefined;

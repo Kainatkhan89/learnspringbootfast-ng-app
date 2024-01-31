@@ -9,7 +9,7 @@ import {LoadingSpinnerComponent} from "../../shared/loading-spinner/loading-spin
 import {HomePageFooterComponent} from "./home-page-footer/home-page-footer.component";
 import {HomePageLearningPathComponent} from "./home-page-learning-path/home-page-learning-path.component";
 import {AlertPanelComponent} from "../../shared/alert-panel/alert-panel.component";
-import {ProgressDataService} from "../../core/services/progress/progress-data.service";
+import {LearningProgressService} from "../../core/services/progress/learning-progress.service";
 import {ITutorial} from "../../core/models/learning-path/tutorial.model";
 import {LearningPathService} from "../../core/services/learning-path/learning-path.service";
 
@@ -33,7 +33,7 @@ import {LearningPathService} from "../../core/services/learning-path/learning-pa
 })
 export class HomePageComponent implements OnInit, OnDestroy {
   private _learningPathDataService: LearningPathService = inject(LearningPathService);
-  private _progressDataService: ProgressDataService = inject(ProgressDataService);
+  private _progressDataService: LearningProgressService = inject(LearningProgressService);
 
   private _learningPathSubscription: Subscription | undefined;
   private _progressPercentageSubscription: Subscription | undefined;

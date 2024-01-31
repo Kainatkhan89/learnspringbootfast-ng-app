@@ -8,7 +8,7 @@ import {UserService} from "../user/user.service";
 @Injectable({
   providedIn: 'root'
 })
-export class ProgressDataService {
+export class LearningProgressService {
   private readonly _progressDataApi: string = '/api/progress';
 
   private _httpClient: HttpClient = inject(HttpClient);
@@ -26,7 +26,7 @@ export class ProgressDataService {
   }
 
   initializeLearningPathProgress(): void {
-    
+
   }
 
   getUserProgress$(): Observable<IProgress> {
