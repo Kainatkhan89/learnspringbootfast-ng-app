@@ -19,7 +19,15 @@ export class ProgressDataService {
   progressPercentageSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   progressPercentage$: Observable<number> = this.progressPercentageSubject.asObservable();
 
-  constructor() { }
+  constructor() {
+    if (!this._localProgressData) {
+      this.initializeLearningPathProgress();
+    }
+  }
+
+  initializeLearningPathProgress(): void {
+    
+  }
 
   getUserProgress$(): Observable<IProgress> {
     return this._userService.user$.pipe(

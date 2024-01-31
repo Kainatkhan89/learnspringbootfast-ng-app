@@ -9,6 +9,8 @@ import {ILearningPath} from "../../core/models/learning-path/learning-path.model
 import {TutorialPlaylistComponent} from "./tutorial-playlist/tutorial-playlist.component";
 import {ITutorial} from "../../core/models/learning-path/tutorial.model";
 import {AlertPanelComponent} from "../../shared/alert-panel/alert-panel.component";
+import {LearningPathData} from "../../core/services/learning-path/learning-path.data";
+import {LearningPathService} from "../../core/services/learning-path/learning-path.service";
 
 @Component({
   selector: 'lsbf-tutorial-page',
@@ -29,11 +31,11 @@ import {AlertPanelComponent} from "../../shared/alert-panel/alert-panel.componen
   styleUrl: './tutorial-page.component.css'
 })
 export class TutorialPageComponent implements OnInit, OnDestroy {
-  private _userLearningDataService: UserLearningDataService = inject(UserLearningDataService);
+  private _learningPathService: LearningPathService = inject(LearningPathService);
   private _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private _router: Router = inject(Router);
 
-  private _userLearningDataSubscription: Subscription | undefined;
+  private _learningDataSubscription: Subscription | undefined;
   private _activatedRouteSubscription: Subscription | undefined;
 
   currentTutorial: ITutorial | undefined;
@@ -41,12 +43,12 @@ export class TutorialPageComponent implements OnInit, OnDestroy {
   errorOccurred: boolean = false;
 
   ngOnInit(): void {
-    this._subscribeToUserLearningData$();
+    this._subscribeToLearningData$();
     this._subscribeToGetTutorialFromActivatedRouteData$();
   }
 
   ngOnDestroy(): void {
-     this._userLearningDataSubscription?.unsubscribe();
+     this._learningDataSubscription?.unsubscribe();
      this._activatedRouteSubscription?.unsubscribe();
   }
 
@@ -65,8 +67,8 @@ export class TutorialPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  private _subscribeToUserLearningData$(): void {
-    this._userLearningDataSubscription = this._userLearningDataService.userLearningData$?.subscribe(value => {
+  private _subscribeToLearningData$(): void {
+    this._learningDataSubscription = this._learningPathService.getLearningPath$()?.subscribe(value => {
       this.userLearningData = value;
     });
   }
