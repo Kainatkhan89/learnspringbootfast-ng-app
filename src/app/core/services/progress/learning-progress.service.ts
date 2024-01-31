@@ -31,15 +31,7 @@ export class LearningProgressService {
     );
   }
 
-  constructor() {
-    if (!this._progressData) {
-      this.initializeLearningPathProgress();
-    }
-  }
-
-  initializeLearningPathProgress(): void {
-
-  }
+  constructor() {}
 
   getUserProgress$(): Observable<IProgress> {
     return this._userService.user$.pipe(
