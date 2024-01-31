@@ -4,12 +4,10 @@ import {LoadingSpinnerComponent} from "../../shared/loading-spinner/loading-spin
 import {NgForOf, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
 import {ActivatedRoute, Router, RouterLink, RouterOutlet} from "@angular/router";
 import {VideoPlayerComponent} from "./video-player/video-player.component";
-import {UserLearningDataService} from "../../core/services/user-learning-data/user-learning-data.service";
 import {ILearningPath} from "../../core/models/learning-path/learning-path.model";
 import {TutorialPlaylistComponent} from "./tutorial-playlist/tutorial-playlist.component";
 import {ITutorial} from "../../core/models/learning-path/tutorial.model";
 import {AlertPanelComponent} from "../../shared/alert-panel/alert-panel.component";
-import {LearningPathData} from "../../core/services/learning-path/learning-path.data";
 import {LearningPathService} from "../../core/services/learning-path/learning-path.service";
 
 @Component({
