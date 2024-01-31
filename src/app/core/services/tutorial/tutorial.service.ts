@@ -19,6 +19,9 @@ export class TutorialService {
     this.currentTutorialSubject.next(tutorial);
   }
 
+  getAllTutorials$(): Observable<ITutorial[]> {
+    return this._getAllLearningPathTutorials$();
+  }
   getTutorialById$(tutorialId: number): Observable<ITutorial | null> {
     return this._getAllLearningPathTutorials$().pipe(
       map(tutorials => tutorials.find(tutorial => tutorial.id === tutorialId) || null),
