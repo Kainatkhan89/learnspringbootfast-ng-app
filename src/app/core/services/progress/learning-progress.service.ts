@@ -1,8 +1,9 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, EMPTY, Observable, of, switchMap, tap} from "rxjs";
+import {BehaviorSubject, combineLatest, EMPTY, map, Observable, of, switchMap, tap} from "rxjs";
 import {IProgress} from "../../models/progress/progress.model";
 import {UserService} from "../user/user.service";
+import {TutorialService} from "../tutorial/tutorial.service";
 
 
 @Injectable({
@@ -13,11 +14,25 @@ export class LearningProgressService {
 
   private _httpClient: HttpClient = inject(HttpClient);
   private _userService: UserService = inject(UserService);
+  private _tutorialService: TutorialService = inject(TutorialService);
 
   private _localProgressData: IProgress | undefined;
 
   progressPercentageSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   progressPercentage$: Observable<number> = this.progressPercentageSubject.asObservable();
+
+  getProgressPercentage$(): Observable<number> {
+    return combineLatest([this._tutorialService.getAllTutorials$(), this.getUserProgress$()]).pipe(
+      map(([tutorials, userProgress]) => {
+        const totalTutorialsCount = tutorials.length;
+
+        const completedTutorialsCount = tutorials.filter(tutorial =>
+          userProgress.completedTutorialIds.includes(tutorial.id)).length;
+
+        return (completedTutorialsCount / totalTutorialsCount) * 100;
+      })
+    );
+  }
 
   constructor() {
     if (!this._localProgressData) {
