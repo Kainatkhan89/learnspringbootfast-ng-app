@@ -32,7 +32,6 @@ import {LearningPathService} from "../../core/services/learning-path/learning-pa
   styleUrl: './home-page.component.css'
 })
 export class HomePageComponent implements OnInit, OnDestroy {
-  // private _userLearningDataService: UserLearningDataService = inject(UserLearningDataService);
   private _learningPathDataService: LearningPathService = inject(LearningPathService);
   private _progressDataService: ProgressDataService = inject(ProgressDataService);
 
@@ -52,7 +51,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._learningPathSubscription = this._subscribeToUserLearningData$();
+    this._learningPathSubscription = this._subscribeToLearningData$();
     this._progressPercentageSubscription = this._subscribeToProgressPercentage$();
     // this._lastCompletedTutorialSubscription = this._subscribeToLastCompletedTutorial$();
   }
@@ -63,7 +62,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this._lastCompletedTutorialSubscription?.unsubscribe();
   }
 
-  private _subscribeToUserLearningData$(): Subscription | undefined {
+  private _subscribeToLearningData$(): Subscription | undefined {
     return this._learningPathDataService.getLearningPath$()?.subscribe({
       next: (data) => {
         this.learningPath = data
