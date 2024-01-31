@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, combineLatest, EMPTY, map, Observable, of, switchMap, tap} from "rxjs";
+import {combineLatest, EMPTY, map, Observable, of, switchMap, tap} from "rxjs";
 import {IProgress} from "../../models/progress/progress.model";
 import {UserService} from "../user/user.service";
 import {TutorialService} from "../tutorial/tutorial.service";
@@ -16,10 +16,7 @@ export class LearningProgressService {
   private _userService: UserService = inject(UserService);
   private _tutorialService: TutorialService = inject(TutorialService);
 
-  private _localProgressData: IProgress | undefined;
-
-  progressPercentageSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  progressPercentage$: Observable<number> = this.progressPercentageSubject.asObservable();
+  private _progressData: IProgress | undefined;
 
   getProgressPercentage$(): Observable<number> {
     return combineLatest([this._tutorialService.getAllTutorials$(), this.getUserProgress$()]).pipe(
@@ -35,7 +32,7 @@ export class LearningProgressService {
   }
 
   constructor() {
-    if (!this._localProgressData) {
+    if (!this._progressData) {
       this.initializeLearningPathProgress();
     }
   }
@@ -48,8 +45,8 @@ export class LearningProgressService {
     return this._userService.user$.pipe(
       switchMap(user => {
         if (user && user.uid) {
-          if (this._localProgressData) {
-            return of(this._localProgressData);
+          if (this._progressData) {
+            return of(this._progressData);
           }
 
           return this._fetchUserProgressData$(user.uid);
@@ -63,7 +60,7 @@ export class LearningProgressService {
   private _fetchUserProgressData$(userId: string): Observable<IProgress> {
     return this._httpClient.get<IProgress>(this._progressDataApi).pipe(
       tap(value => {
-        this._localProgressData = value;
+        this._progressData = value;
       })
     );
   }
