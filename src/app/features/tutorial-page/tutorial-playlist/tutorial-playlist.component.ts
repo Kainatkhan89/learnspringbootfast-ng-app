@@ -5,6 +5,7 @@ import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {VideoPlayerService} from "../../../core/services/video-player/video-player.service";
 import {Observable} from "rxjs";
+import {LearningProgressService} from "../../../core/services/progress/learning-progress.service";
 
 @Component({
   selector: 'lsbf-tutorial-playlist',
