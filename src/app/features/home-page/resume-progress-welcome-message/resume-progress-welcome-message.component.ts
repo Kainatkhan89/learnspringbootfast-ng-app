@@ -5,6 +5,7 @@ import {ITutorial} from "../../../core/models/learning-path/tutorial.model";
 import {NgIf} from "@angular/common";
 import {TutorialService} from "../../../core/services/tutorial/tutorial.service";
 import {last, Subscription} from "rxjs";
+import {LearningProgressService} from "../../../core/services/progress/learning-progress.service";
 
 @Component({
   selector: 'lsbf-resume-progress-welcome-message',
