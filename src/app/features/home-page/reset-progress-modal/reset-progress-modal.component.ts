@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {animate, style, transition, trigger} from "@angular/animations";
+import {LearningProgressService} from "../../../core/services/progress/learning-progress.service";
+import {ModalService} from "../../../core/services/modal/modal.service";
 
 @Component({
   selector: 'lsbf-reset-progress-modal',
@@ -31,5 +33,15 @@ import {animate, style, transition, trigger} from "@angular/animations";
   ]
 })
 export class ResetProgressModalComponent {
+  private _learningProgressService: LearningProgressService = inject(LearningProgressService);
+  private _modalService: ModalService = inject(ModalService);
 
+  resetProgress(): void {
+    this._learningProgressService.resetLearningProgress();
+    this._modalService.hideModal();
+  }
+
+  cancel(): void {
+    this._modalService.hideModal();
+  }
 }
