@@ -1,1 +1,12 @@
-<p *ngIf="module">{{ module.title }}</p>
+<div class="border-b border-gray-200 overflow-hidden">
+  <div class="flex items-center justify-between px-4 py-4 sm:px-6 bg-white">
+    <span class="inline-flex items-center gap-x-2">
+      <lsbf-module-icon [icon]="module?.styles?.icon" [color]="module?.styles?.color" size="SMALL"></lsbf-module-icon>
+      <h3 class="text-sm font-semibold leading-6 text-gray-900">{{module?.title}}</h3>
+    </span>
+  </div>
+  <ul role="list">
+<!--      <app-tutorial-list-item *ngFor="let tutorial of module?.tutorials" [tutorial]="tutorial" [currentTutorialNumber]="currentTutorialNumber"></app-tutorial-list-item>-->
+  </ul>
+</div>
+
