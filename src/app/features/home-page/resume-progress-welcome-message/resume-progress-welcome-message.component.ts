@@ -43,6 +43,4 @@ export class ResumeProgressWelcomeMessageComponent implements OnDestroy {
   showResetProgressModal(): void {
     // TODO: Implement reset progress modal
   }
-
-    protected readonly last = last;
 }
