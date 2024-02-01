@@ -6,6 +6,7 @@ import {NgIf} from "@angular/common";
 import {TutorialService} from "../../../core/services/tutorial/tutorial.service";
 import {last, Subscription} from "rxjs";
 import {LearningProgressService} from "../../../core/services/progress/learning-progress.service";
+import {ModalService} from "../../../core/services/modal/modal.service";
 
 @Component({
   selector: 'lsbf-resume-progress-welcome-message',
@@ -23,6 +24,7 @@ export class ResumeProgressWelcomeMessageComponent implements OnDestroy {
   @Input() progressPercentage: number | undefined;
 
   private _tutorialService: TutorialService = inject(TutorialService);
+  private _modalService: ModalService = inject(ModalService);
   private _router: Router = inject(Router);
 
   private _nextTutorialSubscription: Subscription | undefined;
@@ -42,6 +44,6 @@ export class ResumeProgressWelcomeMessageComponent implements OnDestroy {
   }
 
   showResetProgressModal(): void {
-    // TODO: Implement reset progress modal
+    this._modalService.showModal();
   }
 }
