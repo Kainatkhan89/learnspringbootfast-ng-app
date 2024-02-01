@@ -38,6 +38,19 @@ export class LearningProgressService {
     )
   }
 
+  setTutorialAsCompleted(tutorialId: number): void {
+    const currentProgress = this._progressDataSubject.getValue();
+
+    if (!this._alreadyCompleted(tutorialId)) {
+      const updatedProgress: IProgress = {
+        ...currentProgress,
+        completedTutorialIds: [...currentProgress.completedTutorialIds, tutorialId]
+      };
+
+      this._progressDataSubject.next(updatedProgress);
+    }
+  }
+
   private _fetchUserProgressData(): void {
     this._userService.user$.pipe(
       take(1),
@@ -59,5 +72,10 @@ export class LearningProgressService {
         error: err => console.error('Failed to fetch user progress data', err)
       }
     );
+  }
+
+
+  private _alreadyCompleted(tutorialId: number): boolean {
+    return this._progressDataSubject.getValue().completedTutorialIds.includes(tutorialId);
   }
 }
