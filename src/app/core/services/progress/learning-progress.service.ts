@@ -62,6 +62,10 @@ export class LearningProgressService {
     this._progressDataSubject.next(resetProgress);
   }
 
+  isTutorialCompleted(tutorialId: number): boolean {
+    return this._alreadyCompleted(tutorialId);
+  }
+
   private _fetchUserProgressData(): void {
     this._userService.user$.pipe(
       take(1),

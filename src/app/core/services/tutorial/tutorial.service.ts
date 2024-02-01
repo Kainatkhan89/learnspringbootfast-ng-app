@@ -10,14 +10,7 @@ import {ITutorial} from "../../models/learning-path/tutorial.model";
 export class TutorialService {
   private _learningPathService: LearningPathService = inject(LearningPathService);
 
-  currentTutorialSubject: Subject<ITutorial | null> = new BehaviorSubject<ITutorial | null>(null);
-  currentTutorial$: Observable<ITutorial | null> = this.currentTutorialSubject.asObservable();
-
   constructor() { }
-
-  setCurrentTutorial(tutorial: ITutorial): void {
-    this.currentTutorialSubject.next(tutorial);
-  }
 
   getAllTutorials$(): Observable<ITutorial[]> {
     return this._getAllLearningPathTutorials$();
