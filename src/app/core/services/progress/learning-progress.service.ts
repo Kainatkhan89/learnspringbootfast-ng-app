@@ -2,7 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {UserService} from "../user/user.service";
 import {TutorialService} from "../tutorial/tutorial.service";
-import {BehaviorSubject, combineLatest, map, Observable, pipe, take, tap} from "rxjs";
+import {BehaviorSubject, catchError, combineLatest, map, Observable, switchMap, take, tap} from "rxjs";
 import {IProgress} from "../../models/progress/progress.model";
 
 
@@ -20,7 +20,7 @@ export class LearningProgressService {
   private _progressDataSubject: BehaviorSubject<IProgress> = new BehaviorSubject<IProgress>(this._preInitializationProgressData);
 
   constructor() {
-    this._fetchProgressData();
+    this._fetchUserProgressData();
   }
 
   getProgressData$(): Observable<IProgress> {
@@ -38,14 +38,26 @@ export class LearningProgressService {
     )
   }
 
-  private _fetchProgressData(): void {
-    this._httpClient.get<IProgress>(this._progressDataApi).pipe(
+  private _fetchUserProgressData(): void {
+    this._userService.user$.pipe(
       take(1),
-      pipe(
-        tap(value => {
-          this._progressDataSubject.next(value);
-        })
-      )
-    ).subscribe();
+      switchMap(user => {
+        if (!user || !user.uid) {
+          throw new Error('User ID not found');
+        }
+
+        // return this._httpClient.get<IProgress>(`${this._progressDataApi}/${user.uid}`);
+        return this._httpClient.get<IProgress>(`${this._progressDataApi}`).pipe(
+          catchError((err) => { throw new Error(err) })
+        )
+      }),
+      tap(value => {
+        this._progressDataSubject.next(value);
+      })
+    ).subscribe(
+      {
+        error: err => console.error('Failed to fetch user progress data', err)
+      }
+    );
   }
 }
