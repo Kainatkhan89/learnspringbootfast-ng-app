@@ -1,7 +1,8 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {ITutorial} from "../../../../../core/models/learning-path/tutorial.model";
-import {RouterLink} from "@angular/router";
+import {ActivatedRoute, ParamMap, RouterLink} from "@angular/router";
 import {NgClass, NgIf} from "@angular/common";
+import {map, Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'lsbf-tutorial-playlist-item',
@@ -14,11 +15,26 @@ import {NgClass, NgIf} from "@angular/common";
   templateUrl: './tutorial-playlist-item.component.html',
   styleUrl: './tutorial-playlist-item.component.css'
 })
-export class TutorialPlaylistItemComponent {
+export class TutorialPlaylistItemComponent implements OnInit, OnDestroy {
   @Input() tutorial: ITutorial | undefined;
-  @Input() currentlyPlayingTutorialId: number | undefined;
 
-  get isCurrentlyPlaying(): boolean {
-    return this.tutorial && this.currentlyPlayingTutorialId ? this.currentlyPlayingTutorialId === this.tutorial.id : false;
+  private _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+  private _activatedRouteSubscription: Subscription | undefined;
+
+  isCurrentlyPlaying: boolean = false;
+
+  ngOnInit(): void {
+    this._activatedRouteSubscription = this._activatedRoute.paramMap.pipe(
+      map(params => params.get('tutorialId'))
+    ).subscribe(tutorialIdStr => {
+      if (tutorialIdStr != null && this.tutorial) {
+        const tutorialIdInt: number = parseInt(tutorialIdStr, 10);
+        this.isCurrentlyPlaying =  tutorialIdInt === this.tutorial.id;
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this._activatedRouteSubscription?.unsubscribe();
   }
 }

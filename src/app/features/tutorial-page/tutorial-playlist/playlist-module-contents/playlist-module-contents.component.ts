@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {IModule} from "../../../../core/models/learning-path/module.model";
 import {NgForOf, NgIf} from "@angular/common";
 import {ModuleIconComponent} from "../../../../shared/icons/module-icon/module-icon.component";

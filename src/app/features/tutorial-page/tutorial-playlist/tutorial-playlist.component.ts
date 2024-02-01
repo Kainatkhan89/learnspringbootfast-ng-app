@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, Input, OnInit} from '@angular/core';
 import {ILearningPath} from "../../../core/models/learning-path/learning-path.model";
 import {RouterLink} from "@angular/router";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
