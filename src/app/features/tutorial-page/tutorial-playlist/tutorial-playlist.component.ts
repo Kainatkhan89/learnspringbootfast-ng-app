@@ -5,6 +5,7 @@ import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {VideoPlayerService} from "../../../core/services/video-player/video-player.service";
 import {Observable} from "rxjs";
+import {PlaylistModuleContentsComponent} from "./playlist-module-contents/playlist-module-contents.component";
 
 @Component({
   selector: 'lsbf-tutorial-playlist',
@@ -14,6 +15,7 @@ import {Observable} from "rxjs";
     NgForOf,
     NgIf,
     AsyncPipe,
+    PlaylistModuleContentsComponent,
 
   ],
   templateUrl: './tutorial-playlist.component.html',
