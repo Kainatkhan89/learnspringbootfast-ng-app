@@ -23,6 +23,10 @@ export class LearningProgressService {
     this._fetchUserProgressData();
   }
 
+  get currentProgress(): IProgress {
+    return this._progressDataSubject.getValue();
+  }
+
   getProgressData$(): Observable<IProgress> {
     return this._progressDataSubject.asObservable();
   }
@@ -39,16 +43,23 @@ export class LearningProgressService {
   }
 
   setTutorialAsCompleted(tutorialId: number): void {
-    const currentProgress = this._progressDataSubject.getValue();
-
     if (!this._alreadyCompleted(tutorialId)) {
       const updatedProgress: IProgress = {
-        ...currentProgress,
-        completedTutorialIds: [...currentProgress.completedTutorialIds, tutorialId]
+        ...this.currentProgress,
+        completedTutorialIds: [...this.currentProgress.completedTutorialIds, tutorialId]
       };
 
       this._progressDataSubject.next(updatedProgress);
     }
+  }
+
+  resetLearningProgress(): void {
+    const resetProgress: IProgress = {
+      ...this.currentProgress,
+      completedTutorialIds: []
+    }
+
+    this._progressDataSubject.next(resetProgress);
   }
 
   private _fetchUserProgressData(): void {
