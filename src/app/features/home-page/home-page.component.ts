@@ -76,7 +76,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   private _subscribeToProgressPercentage$(): Subscription | undefined {
-    return this._learningProgressService.getProgressPercentage$().subscribe((value) => this.progressPercentage = value);
+    return this._learningProgressService.getPercentageProgress$().subscribe((value) => this.progressPercentage = value);
   }
 
   // private _subscribeToLastCompletedTutorial$(): Subscription | undefined {

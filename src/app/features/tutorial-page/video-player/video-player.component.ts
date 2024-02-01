@@ -170,7 +170,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   }
 
   private _subscribeToLearningPathProgress(): void {
-    this._learningPathProgressSubscription = this._learningProgressService.getProgressPercentage$().subscribe(value => {
+    this._learningPathProgressSubscription = this._learningProgressService.getPercentageProgress$().subscribe(value => {
       this.learningPathProgress = value;
     })
   }
