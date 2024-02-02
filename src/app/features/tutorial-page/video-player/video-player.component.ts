@@ -122,6 +122,14 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
     return this.currentTutorial ? this._learningProgressService.isTutorialCompleted(this.currentTutorial.id) : false;
   }
 
+  get isLastTutorial(): boolean {
+    return this.nextTutorialId === undefined;
+  }
+
+  get isFirstTutorial(): boolean {
+    return this.previousTutorialId === undefined;
+  }
+
   handlePlaybackToggle(): void {
     this._togglePlayback();
     this._toggleControlsDisplay();
@@ -167,11 +175,11 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   }
 
   goToNextTutorial(): void {
-    if (this.nextTutorialId) this._navigateToTutorial(this.nextTutorialId);
+    if (this.nextTutorialId != undefined) this._navigateToTutorial(this.nextTutorialId);
   }
 
   goToPreviousTutorial(): void {
-    if (this.previousTutorialId) this._navigateToTutorial(this.previousTutorialId);
+    if (this.previousTutorialId != undefined) this._navigateToTutorial(this.previousTutorialId);
   }
 
   private _navigateToTutorial(tutorialId: number): void {
