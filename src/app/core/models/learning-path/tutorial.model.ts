@@ -6,5 +6,4 @@ export interface ITutorial {
   videoUrl: string;
   startFilesUrl: string;
   finishedFilesUrl: string;
-  completed?: boolean;
 }

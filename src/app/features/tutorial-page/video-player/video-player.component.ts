@@ -1,13 +1,12 @@
 import {Component, ElementRef, inject, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Observable, of, Subscription} from "rxjs";
-import {TutorialService} from "../../../core/services/tutorial/tutorial.service";
-import {ActivatedRoute, Router, RouterLink} from "@angular/router";
+import {Subscription} from "rxjs";
+import {RouterLink} from "@angular/router";
 import {ITutorial} from "../../../core/models/learning-path/tutorial.model";
 import {AsyncPipe, NgClass, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
 import {AlertPanelComponent} from "../../../shared/alert-panel/alert-panel.component";
 import {LoadingSpinnerComponent} from "../../../shared/loading-spinner/loading-spinner.component";
 import {VideoPlayerService} from "../../../core/services/video-player/video-player.service";
-import {ProgressDataService} from "../../../core/services/progress/progress-data.service";
+import {LearningProgressService} from "../../../core/services/progress/learning-progress.service";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {PercentageFormatPipe} from "../../../core/pipes/percentage-format/percentage-format.pipe";
@@ -48,8 +47,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   @ViewChild("videoElementRef") videoElementRef: ElementRef<HTMLVideoElement> | undefined;
 
   private _videoPlayerService: VideoPlayerService = inject(VideoPlayerService);
-  private _progressDataService: ProgressDataService = inject(ProgressDataService);
-  private _router: Router = inject(Router);
+  private _learningProgressService: LearningProgressService = inject(LearningProgressService);
 
   private _getTutorialSubscription: Subscription | undefined;
   private _volumeSliderSubscription: Subscription | undefined;
@@ -125,6 +123,10 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
     return false;
   }
 
+  get isCurrentTutorialCompleted(): boolean {
+    return this.currentTutorial ? this._learningProgressService.isTutorialCompleted(this.currentTutorial.id) : false;
+  }
+
   handlePlaybackToggle(): void {
     this._togglePlayback();
     this._toggleControlsDisplay();
@@ -165,6 +167,10 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
     if (this.videoElement) this.videoElement.requestFullscreen();
   }
 
+  toggleTutorialCompletionStatus(): void {
+    this.isCurrentTutorialCompleted ? this._setCurrentTutorialAsNotCompleted() : this._setCurrentTutorialAsCompleted();
+  }
+
   private _subscribeToVolumeSliderValueChange(): void {
     this._volumeSliderSubscription = this.volumeSliderControl.valueChanges.subscribe((value) => {
       this.volumeLevel = value;
@@ -172,7 +178,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   }
 
   private _subscribeToLearningPathProgress(): void {
-    this._learningPathProgressSubscription = this._progressDataService.progressPercentage$.subscribe(value => {
+    this._learningPathProgressSubscription = this._learningProgressService.getPercentageProgress$().subscribe(value => {
       this.learningPathProgress = value;
     })
   }
@@ -214,5 +220,13 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
 
   private _seekVideoOnClickEventLocation(event: MouseEvent): void {
     if (this.videoElement) this.currentPlaybackTime = ((event.clientX - this.videoElement.getBoundingClientRect().left) / this.videoElement.offsetWidth) * this.videoDuration;
+  }
+
+  private _setCurrentTutorialAsCompleted(): void {
+    if (this.currentTutorial) this._learningProgressService.setTutorialAsCompleted(this.currentTutorial.id);
+  }
+
+  private _setCurrentTutorialAsNotCompleted(): void {
+    if (this.currentTutorial) this._learningProgressService.setTutorialAsNotCompleted(this.currentTutorial.id);
   }
 }

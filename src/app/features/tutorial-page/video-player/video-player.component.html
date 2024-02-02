@@ -29,12 +29,30 @@
         {{ learningPathProgress | percentageFormat }}
       </div>
 
-      <button (click)="showTutorialPlaylist()" type="button" class="inline-flex items-center gap-x-1.5 rounded-lg bg-transparent px-2.5 py-1.5 ring-2 ring-inset ring-slate-200 text-sm font-semibold text-slate-200 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-        </svg>
-        Tutorials
-      </button>
+      <div class="space-x-2">
+        <button (click)="toggleTutorialCompletionStatus()" [ngSwitch]="isCurrentTutorialCompleted" type="button" class="inline-flex items-center rounded-lg bg-transparent px-2.5 py-1.5 ring-2 ring-inset ring-slate-200 text-sm font-semibold text-slate-200 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+          <span *ngSwitchCase="true" class="inline-flex items-center gap-x-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            Mark Not Completed
+          </span>
+
+          <span *ngSwitchCase="false" class="inline-flex items-center gap-x-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            Mark as Completed
+          </span>
+        </button>
+
+        <button (click)="showTutorialPlaylist()" type="button" class="inline-flex items-center gap-x-1.5 rounded-lg bg-transparent px-2.5 py-1.5 ring-2 ring-inset ring-slate-200 text-sm font-semibold text-slate-200 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+          </svg>
+          Tutorials
+        </button>
+      </div>
     </div>
 
     <div class="h-16 w-full hidden lg:flex flex-row items-center justify-between">
