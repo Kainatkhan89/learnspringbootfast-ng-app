@@ -37,12 +37,14 @@ export class TutorialPageComponent implements OnInit, OnDestroy {
   private _activatedRouteSubscription: Subscription | undefined;
 
   currentTutorial: ITutorial | undefined;
-  userLearningData: ILearningPath | undefined;
+  nextTutorialId: number | undefined;
+  previousTutorialId: number | undefined;
+  learningPath: ILearningPath | undefined;
   errorOccurred: boolean = false;
 
   ngOnInit(): void {
     this._subscribeToLearningData$();
-    this._subscribeToGetTutorialFromActivatedRouteData$();
+    this._subscribeToGetTutorialPageDataFromActivatedRoute$();
   }
 
   ngOnDestroy(): void {
@@ -55,10 +57,12 @@ export class TutorialPageComponent implements OnInit, OnDestroy {
     this._router.navigate(['/home']);
   }
 
-  private _subscribeToGetTutorialFromActivatedRouteData$(): void {
-    this._activatedRouteSubscription = this._activatedRoute.data.subscribe(({ tutorial }) => {
-      if (tutorial) {
-        this.currentTutorial = tutorial;
+  private _subscribeToGetTutorialPageDataFromActivatedRoute$(): void {
+    this._activatedRouteSubscription = this._activatedRoute.data.subscribe(({ tutorialPageData }) => {
+      if (tutorialPageData) {
+        this.currentTutorial = tutorialPageData.currentTutorial;
+        this.nextTutorialId = tutorialPageData.nextTutorialId;
+        this.previousTutorialId = tutorialPageData.previousTutorialId;
       } else {
         this.errorOccurred = true;
       }
@@ -67,7 +71,7 @@ export class TutorialPageComponent implements OnInit, OnDestroy {
 
   private _subscribeToLearningData$(): void {
     this._learningDataSubscription = this._learningPathService.getLearningPath$()?.subscribe(value => {
-      this.userLearningData = value;
+      this.learningPath = value;
     });
   }
 }

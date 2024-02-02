@@ -1,6 +1,6 @@
 import {Component, ElementRef, inject, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from "rxjs";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {ITutorial} from "../../../core/models/learning-path/tutorial.model";
 import {AsyncPipe, NgClass, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
 import {AlertPanelComponent} from "../../../shared/alert-panel/alert-panel.component";
@@ -43,11 +43,14 @@ import {PercentageFormatPipe} from "../../../core/pipes/percentage-format/percen
 })
 export class VideoPlayerComponent implements OnInit, OnDestroy {
   @Input() currentTutorial: ITutorial | undefined;
+  @Input() nextTutorialId: number | undefined;
+  @Input() previousTutorialId: number | undefined;
 
   @ViewChild("videoElementRef") videoElementRef: ElementRef<HTMLVideoElement> | undefined;
 
   private _videoPlayerService: VideoPlayerService = inject(VideoPlayerService);
   private _learningProgressService: LearningProgressService = inject(LearningProgressService);
+  private _router: Router = inject(Router);
 
   private _getTutorialSubscription: Subscription | undefined;
   private _volumeSliderSubscription: Subscription | undefined;
@@ -115,16 +118,16 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
     return this.videoElement ? !this.videoElement.paused : false;
   }
 
-  get isFirstTutorial(): boolean {
-    return false;
+  get isCurrentTutorialCompleted(): boolean {
+    return this.currentTutorial ? this._learningProgressService.isTutorialCompleted(this.currentTutorial.id) : false;
   }
 
   get isLastTutorial(): boolean {
-    return false;
+    return this.nextTutorialId === undefined;
   }
 
-  get isCurrentTutorialCompleted(): boolean {
-    return this.currentTutorial ? this._learningProgressService.isTutorialCompleted(this.currentTutorial.id) : false;
+  get isFirstTutorial(): boolean {
+    return this.previousTutorialId === undefined;
   }
 
   handlePlaybackToggle(): void {
@@ -160,7 +163,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   }
 
   handleVideoEnd(): void {
-    console.log('video ended, can navigate to next tutorial and mark current tutorial as done');
+    if (!this.isCurrentTutorialCompleted) this._setCurrentTutorialAsCompleted();
   }
 
   goFullscreen(): void {
@@ -169,6 +172,18 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
 
   toggleTutorialCompletionStatus(): void {
     this.isCurrentTutorialCompleted ? this._setCurrentTutorialAsNotCompleted() : this._setCurrentTutorialAsCompleted();
+  }
+
+  goToNextTutorial(): void {
+    if (this.nextTutorialId != undefined) this._navigateToTutorial(this.nextTutorialId);
+  }
+
+  goToPreviousTutorial(): void {
+    if (this.previousTutorialId != undefined) this._navigateToTutorial(this.previousTutorialId);
+  }
+
+  private _navigateToTutorial(tutorialId: number): void {
+    this._router.navigate(['/tutorials', tutorialId]);
   }
 
   private _subscribeToVolumeSliderValueChange(): void {

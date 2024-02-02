@@ -42,19 +42,9 @@
                             </div>
                         </div>
                         <div class="modules-container flex-1 flex flex-col overflow-y-auto">
-                          <div *ngIf="userLearningData">
-                            <lsbf-playlist-module-contents *ngFor="let module of userLearningData.modules" [module]="module"></lsbf-playlist-module-contents>
+                          <div *ngIf="learningPath">
+                            <lsbf-playlist-module-contents *ngFor="let module of learningPath.modules" [module]="module"></lsbf-playlist-module-contents>
                           </div>
-
-<!--                            <ul *ngIf="userLearningData" class="space-y-6">-->
-<!--                                <ul *ngFor="let module of userLearningData.modules" class="space-y-4">-->
-<!--                                    <span>Module: {{ module.title }}</span>-->
-<!--                                    <li *ngFor="let tutorial of module.tutorials">-->
-<!--                                        <a [routerLink]="['/tutorials', tutorial.id]">{{ tutorial.title }}</a>-->
-<!--                                    </li>-->
-<!--                                </ul>-->
-<!--                            </ul>-->
-
                         </div>
                         <div class="flex flex-shrink-0 justify-end px-4 py-6 bg-gray-50">
                             <button (click)="closePlaylist()" type="button" class="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:ring-gray-400">Close</button>
@@ -66,18 +56,3 @@
         </div>
     </div>
 </div>
-
-
-
-<!--<div class="h-full overflow-y-auto bg-gray-900 text-slate-200 p-4">-->
-
-<!--  <ul *ngIf="userLearningData" class="space-y-6">-->
-<!--    <ul *ngFor="let module of userLearningData.modules" class="space-y-4">-->
-<!--      <span>Module: {{ module.title }}</span>-->
-<!--      <li *ngFor="let tutorial of module.tutorials">-->
-<!--        <a [routerLink]="['/tutorials', tutorial.id]">{{ tutorial.title }}</a>-->
-<!--      </li>-->
-<!--    </ul>-->
-<!--  </ul>-->
-
-<!--</div>-->
