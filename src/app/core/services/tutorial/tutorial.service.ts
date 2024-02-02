@@ -15,6 +15,9 @@ export class TutorialService {
   getAllTutorials$(): Observable<ITutorial[]> {
     return this._getAllLearningPathTutorials$();
   }
+
+
+
   getTutorialById$(tutorialId: number): Observable<ITutorial | null> {
     return this._getAllLearningPathTutorials$().pipe(
       map(tutorials => tutorials.find(tutorial => tutorial.id === tutorialId) || null),
@@ -25,28 +28,40 @@ export class TutorialService {
     );
   }
 
-  getNextTutorial$(currentTutorialId: number): Observable<ITutorial | null> {
+  getNextTutorialId$(currentTutorialId: number): Observable<number | null> {
     return this._getAllLearningPathTutorials$().pipe(
       map(tutorials => {
         const currentIndex = tutorials.findIndex(tutorial => tutorial.id === currentTutorialId);
         if (currentIndex === -1 || currentIndex >= tutorials.length - 1) {
           return null;
         }
-        return tutorials[currentIndex + 1];
+        return tutorials[currentIndex + 1].id;
       })
     );
   }
 
-  isFirstTutorial$(currentTutorialId: number): Observable<boolean> {
+  getPreviousTutorialId$(currentTutorialId: number): Observable<number | null> {
     return this._getAllLearningPathTutorials$().pipe(
-      map(tutorials => tutorials.findIndex(tutorial => tutorial.id === currentTutorialId) === 0)
+      map(tutorials => {
+        const currentIndex = tutorials.findIndex(tutorial => tutorial.id === currentTutorialId);
+        if (currentIndex === -1 || currentIndex >= tutorials.length - 1) {
+          return null;
+        }
+        return tutorials[currentIndex - 1].id;
+      })
     );
   }
 
-  isLastTutorial$(currentTutorialId: number): Observable<boolean> {
+  isFirstTutorial$(tutorialId: number): Observable<boolean> {
+    return this._getAllLearningPathTutorials$().pipe(
+      map(tutorials => tutorials.findIndex(tutorial => tutorial.id === tutorialId) === 0)
+    );
+  }
+
+  isLastTutorial$(tutorialId: number): Observable<boolean> {
     return this._getAllLearningPathTutorials$().pipe(
       map(tutorials => {
-        const index = tutorials.findIndex(tutorial => tutorial.id === currentTutorialId);
+        const index = tutorials.findIndex(tutorial => tutorial.id === tutorialId);
         return index !== -1 && index === tutorials.length - 1;
       })
     );

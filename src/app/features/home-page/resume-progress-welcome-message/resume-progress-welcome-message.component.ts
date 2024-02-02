@@ -27,17 +27,17 @@ export class ResumeProgressWelcomeMessageComponent implements OnDestroy {
   private _modalService: ModalService = inject(ModalService);
   private _router: Router = inject(Router);
 
-  private _nextTutorialSubscription: Subscription | undefined;
+  private _nextTutorialIdSubscription: Subscription | undefined;
 
   ngOnDestroy() {
-    this._nextTutorialSubscription?.unsubscribe();
+    this._nextTutorialIdSubscription?.unsubscribe();
   }
 
   navigateToNextTutorial(): void {
     if (this.lastCompletedTutorial) {
-      this._nextTutorialSubscription = this._tutorialService.getNextTutorial$(this.lastCompletedTutorial.id).subscribe(nextTutorial => {
-        if (nextTutorial) {
-          this._router.navigate(['/tutorials', nextTutorial.id]);
+      this._nextTutorialIdSubscription = this._tutorialService.getNextTutorialId$(this.lastCompletedTutorial.id).subscribe(nextTutorialId => {
+        if (nextTutorialId) {
+          this._router.navigate(['/tutorials', nextTutorialId]);
         }
       });
     }
