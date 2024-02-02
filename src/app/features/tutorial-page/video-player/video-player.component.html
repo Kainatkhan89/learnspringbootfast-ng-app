@@ -56,7 +56,7 @@
     </div>
 
     <div class="h-16 w-full hidden lg:flex flex-row items-center justify-between">
-      <button [ngClass]="isFirstTutorial ? 'invisible' : ''" class="inline-flex items-center gap-x-1 h-full px-4 rounded-br-lg rounded-tr-lg font-semibold text-sm bg-black opacity-75 text-slate-200 hover:text-white">
+      <button (click)="goToPreviousTutorial()" [ngClass]="!previousTutorialId ? 'invisible' : ''" class="inline-flex items-center gap-x-1 h-full px-4 rounded-br-lg rounded-tr-lg font-semibold text-sm bg-black opacity-75 text-slate-200 hover:text-white">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
         </svg>
@@ -73,7 +73,7 @@
         </svg>
       </button>
 
-      <button [ngClass]="isLastTutorial ? 'invisible' : ''" class="inline-flex items-center gap-x-1 h-full px-4 rounded-bl-lg rounded-tl-lg font-semibold text-sm bg-black opacity-75 text-slate-200 hover:text-white">
+      <button (click)="goToNextTutorial()" [ngClass]="!nextTutorialId ? 'invisible' : ''" class="inline-flex items-center gap-x-1 h-full px-4 rounded-bl-lg rounded-tl-lg font-semibold text-sm bg-black opacity-75 text-slate-200 hover:text-white">
         Next
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
