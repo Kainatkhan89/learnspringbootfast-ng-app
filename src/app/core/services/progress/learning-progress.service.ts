@@ -53,6 +53,19 @@ export class LearningProgressService {
     }
   }
 
+  setTutorialAsNotCompleted(tutorialId: number): void {
+    if (this._alreadyCompleted(tutorialId)) {
+      const updatedCompletedTutorialIds: number[] = this.currentProgress.completedTutorialIds.filter(id => id !== tutorialId);
+
+      const updatedProgress: IProgress = {
+        ...this.currentProgress,
+        completedTutorialIds: updatedCompletedTutorialIds
+      };
+
+      this._progressDataSubject.next(updatedProgress);
+    }
+  }
+
   resetLearningProgress(): void {
     const resetProgress: IProgress = {
       ...this.currentProgress,

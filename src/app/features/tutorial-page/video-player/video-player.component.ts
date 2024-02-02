@@ -123,7 +123,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
     return false;
   }
 
-  get isTutorialCompleted(): boolean {
+  get isCurrentTutorialCompleted(): boolean {
     return this.currentTutorial ? this._learningProgressService.isTutorialCompleted(this.currentTutorial.id) : false;
   }
 
@@ -168,7 +168,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   }
 
   toggleTutorialCompletionStatus(): void {
-    this.isTutorialCompleted ? this._setCurrentTutorialAsNotCompleted() : this._setCurrentTutorialAsCompleted();
+    this.isCurrentTutorialCompleted ? this._setCurrentTutorialAsNotCompleted() : this._setCurrentTutorialAsCompleted();
   }
 
   private _subscribeToVolumeSliderValueChange(): void {
@@ -227,6 +227,6 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   }
 
   private _setCurrentTutorialAsNotCompleted(): void {
-
+    if (this.currentTutorial) this._learningProgressService.setTutorialAsNotCompleted(this.currentTutorial.id);
   }
 }
