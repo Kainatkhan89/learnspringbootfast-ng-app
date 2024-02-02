@@ -123,6 +123,10 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
     return false;
   }
 
+  get isTutorialCompleted(): boolean {
+    return this.currentTutorial ? this._learningProgressService.isTutorialCompleted(this.currentTutorial.id) : false;
+  }
+
   handlePlaybackToggle(): void {
     this._togglePlayback();
     this._toggleControlsDisplay();
@@ -161,6 +165,10 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
 
   goFullscreen(): void {
     if (this.videoElement) this.videoElement.requestFullscreen();
+  }
+
+  toggleTutorialCompletionStatus(): void {
+    this.isTutorialCompleted ? this._setCurrentTutorialAsNotCompleted() : this._setCurrentTutorialAsCompleted();
   }
 
   private _subscribeToVolumeSliderValueChange(): void {
@@ -212,5 +220,13 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
 
   private _seekVideoOnClickEventLocation(event: MouseEvent): void {
     if (this.videoElement) this.currentPlaybackTime = ((event.clientX - this.videoElement.getBoundingClientRect().left) / this.videoElement.offsetWidth) * this.videoDuration;
+  }
+
+  private _setCurrentTutorialAsCompleted(): void {
+    if (this.currentTutorial) this._learningProgressService.setTutorialAsCompleted(this.currentTutorial.id);
+  }
+
+  private _setCurrentTutorialAsNotCompleted(): void {
+
   }
 }
