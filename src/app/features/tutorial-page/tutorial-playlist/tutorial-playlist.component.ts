@@ -44,7 +44,7 @@ import {PlaylistModuleContentsComponent} from "./playlist-module-contents/playli
   ]
 })
 export class TutorialPlaylistComponent {
-  @Input() userLearningData: ILearningPath | undefined;
+  @Input() learningPath: ILearningPath | undefined;
 
   private _videoPlayerService: VideoPlayerService = inject(VideoPlayerService);
 

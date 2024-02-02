@@ -3,7 +3,7 @@
 </div>
 
 <ng-container *ngIf="currentTutorial">
-  <lsbf-video-player [currentTutorial]="currentTutorial"></lsbf-video-player>
-  <lsbf-tutorial-playlist [userLearningData]="userLearningData"></lsbf-tutorial-playlist>
+  <lsbf-video-player [currentTutorial]="currentTutorial" [nextTutorialId]="nextTutorialId" [previousTutorialId]="previousTutorialId"></lsbf-video-player>
+  <lsbf-tutorial-playlist [learningPath]="learningPath"></lsbf-tutorial-playlist>
 </ng-container>
 

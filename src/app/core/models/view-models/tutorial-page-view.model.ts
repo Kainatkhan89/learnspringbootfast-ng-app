@@ -1,7 +1,7 @@
 import {ITutorial} from "../learning-path/tutorial.model";
 
-export interface TutorialPageViewModel {
+export interface ITutorialPageViewModel {
   currentTutorial: ITutorial;
-  nextTutorialId: number | null;
-  previousTutorialId: number | null;
+  nextTutorialId: number | undefined;
+  previousTutorialId: number | undefined;
 }

@@ -43,6 +43,8 @@ import {PercentageFormatPipe} from "../../../core/pipes/percentage-format/percen
 })
 export class VideoPlayerComponent implements OnInit, OnDestroy {
   @Input() currentTutorial: ITutorial | undefined;
+  @Input() nextTutorialId: number | undefined;
+  @Input() previousTutorialId: number | undefined;
 
   @ViewChild("videoElementRef") videoElementRef: ElementRef<HTMLVideoElement> | undefined;
 
@@ -116,11 +118,11 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   }
 
   get isFirstTutorial(): boolean {
-    return false;
+    return this.previousTutorialId === undefined;
   }
 
   get isLastTutorial(): boolean {
-    return false;
+    return this.nextTutorialId === undefined;
   }
 
   get isCurrentTutorialCompleted(): boolean {
