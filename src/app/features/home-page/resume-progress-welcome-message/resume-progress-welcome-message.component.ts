@@ -19,28 +19,16 @@ import {ModalService} from "../../../core/services/modal/modal.service";
   templateUrl: './resume-progress-welcome-message.component.html',
   styleUrl: './resume-progress-welcome-message.component.css'
 })
-export class ResumeProgressWelcomeMessageComponent implements OnDestroy {
+export class ResumeProgressWelcomeMessageComponent {
   @Input() lastCompletedTutorial: ITutorial | undefined | null;
   @Input() progressPercentage: number | undefined;
+  @Input() tutorialToResumeFrom: ITutorial | undefined;
 
-  private _tutorialService: TutorialService = inject(TutorialService);
   private _modalService: ModalService = inject(ModalService);
   private _router: Router = inject(Router);
 
-  private _nextTutorialIdSubscription: Subscription | undefined;
-
-  ngOnDestroy() {
-    this._nextTutorialIdSubscription?.unsubscribe();
-  }
-
   navigateToNextTutorial(): void {
-    if (this.lastCompletedTutorial) {
-      this._nextTutorialIdSubscription = this._tutorialService.getNextTutorialId$(this.lastCompletedTutorial.id).subscribe(nextTutorialId => {
-        if (nextTutorialId) {
-          this._router.navigate(['/tutorials', nextTutorialId]);
-        }
-      });
-    }
+    if (this.tutorialToResumeFrom) this._router.navigate(['/tutorials', this.tutorialToResumeFrom.id]);
   }
 
   showResetProgressModal(): void {

@@ -1,7 +1,7 @@
 <h2 class="text-xl sm:text-2xl sm:text-left font-extrabold tracking-tight text-slate-200 mb-4">
   Welcome <lsbf-waving-hand></lsbf-waving-hand>
 </h2>
-<p *ngIf="firstTutorial" class="font-medium text-slate-200 mb-10 sm:mb-8">Let's start our learning journey at Tutorial 1 <span class="text-indigo-500">-> </span> <a [routerLink]="['/tutorials', firstTutorial.id]" class="font-semibold underline underline-offset-8">{{ firstTutorial.title }}</a>.</p>
+<p *ngIf="tutorialToResumeFrom" class="font-medium text-slate-200 mb-10 sm:mb-8">Let's start our learning journey at Tutorial 1 <span class="text-indigo-500">-> </span> <a [routerLink]="['/tutorials', tutorialToResumeFrom.id]" class="font-semibold underline underline-offset-8">{{ tutorialToResumeFrom.title }}</a>.</p>
 <div class="flex space-x-2">
   <button (click)="navigateToFirstTutorial()" class="rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white hover:bg-green-500/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500/90">Start learning -></button>
 </div>
