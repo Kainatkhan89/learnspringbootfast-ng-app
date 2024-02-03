@@ -1,11 +1,8 @@
-import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {WavingHandComponent} from "../../../shared/icons/waving-hand/waving-hand.component";
 import {Router, RouterLink} from "@angular/router";
 import {ITutorial} from "../../../core/models/learning-path/tutorial.model";
 import {NgIf} from "@angular/common";
-import {TutorialService} from "../../../core/services/tutorial/tutorial.service";
-import {last, Subscription} from "rxjs";
-import {LearningProgressService} from "../../../core/services/progress/learning-progress.service";
 import {ModalService} from "../../../core/services/modal/modal.service";
 
 @Component({
