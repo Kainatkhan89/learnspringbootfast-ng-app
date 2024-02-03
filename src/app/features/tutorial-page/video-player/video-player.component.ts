@@ -55,6 +55,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   private _getTutorialSubscription: Subscription | undefined;
   private _volumeSliderSubscription: Subscription | undefined;
   private _learningPathProgressSubscription: Subscription | undefined;
+  private _tutorialPlaylistDisplaySubscription: Subscription | undefined;
   private _hidePlayerControlsTimerId: number = 0;
 
   errorOccurred: boolean = false;
@@ -71,12 +72,14 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._subscribeToVolumeSliderValueChange();
     this._subscribeToLearningPathProgress();
+    this._subscribeToPlaylistDisplayChange();
   }
 
   ngOnDestroy(): void {
     this._getTutorialSubscription?.unsubscribe();
     this._volumeSliderSubscription?.unsubscribe();
     this._learningPathProgressSubscription?.unsubscribe();
+    this._tutorialPlaylistDisplaySubscription?.unsubscribe();
   }
 
   get videoElement(): HTMLVideoElement | undefined {
@@ -195,6 +198,13 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   private _subscribeToLearningPathProgress(): void {
     this._learningPathProgressSubscription = this._learningProgressService.getPercentageProgress$().subscribe(value => {
       this.learningPathProgress = value;
+    })
+  }
+
+  private _subscribeToPlaylistDisplayChange(): void {
+    this._tutorialPlaylistDisplaySubscription = this._videoPlayerService.showTutorialsPlaylist$.subscribe((showPlaylist) => {
+      this._cancelExistingHideControlsTimer();
+      showPlaylist ? this.videoElement?.pause() : this.videoElement?.play();
     })
   }
 
