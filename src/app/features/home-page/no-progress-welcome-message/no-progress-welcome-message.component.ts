@@ -16,13 +16,13 @@ import {NgIf} from "@angular/common";
   styleUrl: './no-progress-welcome-message.component.css'
 })
 export class NoProgressWelcomeMessageComponent {
-  @Input() firstTutorial: ITutorial | undefined;
+  @Input() tutorialToResumeFrom: ITutorial | undefined;
 
   private _router: Router = inject(Router);
 
   navigateToFirstTutorial(): void {
-    if (this.firstTutorial) {
-      this._router.navigate(['/tutorials', this.firstTutorial.id]);
+    if (this.tutorialToResumeFrom) {
+      this._router.navigate(['/tutorials', this.tutorialToResumeFrom.id]);
     }
   }
 }
