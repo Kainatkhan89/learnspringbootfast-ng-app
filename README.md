@@ -2,7 +2,7 @@
 
 This is the Angular repository of Kainat Khan's full-stack portfolio project built with Angular and Spring Boot.
 
-Please find the Spring Boot back-end repository at: [Spring Boot Repo](https://github.com/Kainatkhan89/learnspringbootfast-web-services-v2).
+Please find the Spring Boot back-end repository at: [Spring Boot Repo](https://github.com/Kainatkhan89/learnspringboot-web-services-v2).
 
 ## Why this project?
 
